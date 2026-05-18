@@ -1,11 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { useEffect, useRef, useState } from "react";
 import { fadeUp } from "@/lib/motion";
-
-const IFRAME_NATIVE_W = 1280;
-const IFRAME_NATIVE_H = 860;
 
 /* Per-tag color definitions */
 const TAG_COLORS: Record<string, { border: string; text: string; bg: string }> = {
@@ -23,7 +19,6 @@ const DEFAULT_TAG = { border: "rgba(255,255,255,0.18)", text: "rgba(255,255,255,
 
 type Project = {
   tags: string[];
-  src: string;
   screenshot?: string;
   domain: string;
   client: string;
@@ -36,7 +31,6 @@ type Project = {
 const projects: Project[] = [
   {
     tags: ["WEBSITE", "COPYWRITING", "DESIGN"],
-    src: "https://immobilienservice-atzor.de/",
     screenshot: "/images/hero-phones/site-atzor.png",
     domain: "immobilienservice-atzor.de",
     client: "Patrick Atzor",
@@ -45,7 +39,6 @@ const projects: Project[] = [
   },
   {
     tags: ["WEBSITE", "DESIGN", "BRANDING"],
-    src: "https://blitzwebsite.de/",
     screenshot: "/images/hero-phones/site-blitzwebsite.png",
     domain: "blitzwebsite.de",
     client: "Dustin Althaus",
@@ -54,7 +47,6 @@ const projects: Project[] = [
   },
   {
     tags: ["WEBSITE", "BRANDING", "SEO"],
-    src: "https://dietz-saft.de/",
     domain: "dietz-saft.de",
     client: "Dietz Saft",
     role: "FAMILIENUNTERNEHMEN · SEIT 3 GENERATIONEN",
@@ -111,24 +103,6 @@ function Avatar({ src, initials, logoMode }: { src?: string; initials?: string; 
 }
 
 function ProjectCard({ p, i }: { p: Project; i: number }) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [containerW, setContainerW] = useState(580);
-  const [liveActive, setLiveActive] = useState(false);
-  const [iframeLoaded, setIframeLoaded] = useState(false);
-
-  useEffect(() => {
-    const el = cardRef.current;
-    if (!el) return;
-    const ro = new ResizeObserver(([entry]) => setContainerW(entry.contentRect.width));
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
-
-  const scale = containerW / IFRAME_NATIVE_W;
-  const visibleH = Math.round(IFRAME_NATIVE_H * scale);
-
-  const hasPreview = !!p.screenshot || liveActive;
-
   return (
     <motion.div
       {...fadeUp(0.12 + i * 0.12)}
@@ -157,80 +131,28 @@ function ProjectCard({ p, i }: { p: Project; i: number }) {
           </div>
         </div>
 
-        {/* Preview area */}
-        <div
-          ref={cardRef}
-          className="relative overflow-hidden w-full"
-          style={{ height: visibleH || undefined, aspectRatio: visibleH ? undefined : "16/10" }}
-        >
-          {/* Screenshot base layer */}
-          {p.screenshot && (
+        {/* Preview */}
+        <div className="relative overflow-hidden w-full" style={{ aspectRatio: "16/10" }}>
+          {p.screenshot ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
               src={p.screenshot}
               alt={p.client}
-              className="absolute inset-0 w-full h-full object-cover object-top"
-              style={{ opacity: iframeLoaded ? 0 : 1, transition: "opacity 0.5s ease" }}
+              className="w-full h-full object-cover object-top"
             />
-          )}
-
-          {/* No-screenshot placeholder */}
-          {!p.screenshot && !liveActive && (
+          ) : (
             <div
-              className="w-full h-full flex flex-col items-center justify-center gap-4"
-              style={{ background: "linear-gradient(135deg, #1a0a00 0%, #2d1500 50%, #1a0a00 100%)" }}
+              className="w-full h-full flex flex-col items-center justify-center gap-5"
+              style={{ background: "linear-gradient(135deg, #0d2e0d 0%, #1a4d1a 40%, #0d3020 100%)" }}
             >
               {p.avatar && (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={p.avatar} alt="" className="h-14 w-14 object-contain opacity-80" />
+                <img src={p.avatar} alt="" className="h-16 w-16 object-contain drop-shadow-lg" />
               )}
-              <span className="text-white/30 text-[12px] font-mono tracking-widest">{p.domain}</span>
+              <span className="text-white/40 text-[11px] font-mono tracking-[0.2em] uppercase">{p.domain}</span>
             </div>
           )}
-
-          {/* Live iframe — only rendered after user taps */}
-          {liveActive && (
-            <div
-              className="absolute top-0 left-0"
-              style={{
-                width: IFRAME_NATIVE_W,
-                height: IFRAME_NATIVE_H,
-                transform: `scale(${scale})`,
-                transformOrigin: "top left",
-                pointerEvents: "none",
-                opacity: iframeLoaded ? 1 : 0,
-                transition: "opacity 0.5s ease",
-              }}
-            >
-              <iframe
-                src={p.src}
-                title={p.client}
-                scrolling="no"
-                onLoad={() => setIframeLoaded(true)}
-                style={{ width: IFRAME_NATIVE_W, height: IFRAME_NATIVE_H, border: "none", display: "block", backgroundColor: "#fff" }}
-              />
-            </div>
-          )}
-
-          {/* Live-preview button — shown until iframe is ready */}
-          {!iframeLoaded && (
-            <button
-              onClick={() => setLiveActive(true)}
-              className="absolute inset-0 flex flex-col items-center justify-center gap-3 cursor-pointer"
-              style={{ background: "rgba(0,0,0,0.38)", backdropFilter: "blur(3px)", WebkitBackdropFilter: "blur(3px)" }}
-            >
-              <div className="flex items-center gap-2 rounded-full bg-white/10 border border-white/20 px-4 py-2">
-                <span className="relative flex h-2 w-2 shrink-0">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#22c55e] opacity-70" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-[#22c55e]" />
-                </span>
-                <span className="text-white text-[12px] font-bold tracking-wide">Live ansehen</span>
-              </div>
-              <span className="text-white/40 text-[10px]">Tippt zum Laden der echten Website</span>
-            </button>
-          )}
-
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-b from-transparent to-[#0f0f0f]" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-gradient-to-b from-transparent to-[#0f0f0f]" />
         </div>
       </div>
 

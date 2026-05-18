@@ -1,7 +1,11 @@
 "use client";
 
 import { motion } from "motion/react";
+import { useEffect, useRef, useState } from "react";
 import { fadeUp } from "@/lib/motion";
+
+const IFRAME_NATIVE_W = 1280;
+const IFRAME_NATIVE_H = 860;
 
 /* Per-tag color definitions */
 const TAG_COLORS: Record<string, { border: string; text: string; bg: string }> = {
@@ -19,7 +23,8 @@ const DEFAULT_TAG = { border: "rgba(255,255,255,0.18)", text: "rgba(255,255,255,
 
 type Project = {
   tags: string[];
-  screenshot?: string;  /* static image path — no iframe */
+  src: string;
+  screenshot?: string;
   domain: string;
   client: string;
   role: string;
@@ -31,6 +36,7 @@ type Project = {
 const projects: Project[] = [
   {
     tags: ["WEBSITE", "COPYWRITING", "DESIGN"],
+    src: "https://immobilienservice-atzor.de/",
     screenshot: "/images/hero-phones/site-atzor.png",
     domain: "immobilienservice-atzor.de",
     client: "Patrick Atzor",
@@ -39,6 +45,7 @@ const projects: Project[] = [
   },
   {
     tags: ["WEBSITE", "DESIGN", "BRANDING"],
+    src: "https://blitzwebsite.de/",
     screenshot: "/images/hero-phones/site-blitzwebsite.png",
     domain: "blitzwebsite.de",
     client: "Dustin Althaus",
@@ -47,6 +54,7 @@ const projects: Project[] = [
   },
   {
     tags: ["WEBSITE", "BRANDING", "SEO"],
+    src: "https://dietz-saft.de/",
     domain: "dietz-saft.de",
     client: "Dietz Saft",
     role: "FAMILIENUNTERNEHMEN · SEIT 3 GENERATIONEN",
@@ -103,6 +111,45 @@ function Avatar({ src, initials, logoMode }: { src?: string; initials?: string; 
 }
 
 function ProjectCard({ p, i }: { p: Project; i: number }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [iframeLoaded, setIframeLoaded] = useState(false);
+  const [shouldLoad, setShouldLoad] = useState(false);
+  const [isMobile, setIsMobile] = useState(true);
+  const [containerW, setContainerW] = useState(580);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
+
+  // Lazy-load: only start loading iframe when card enters viewport
+  useEffect(() => {
+    if (isMobile) return;
+    const el = cardRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setShouldLoad(true); obs.disconnect(); } },
+      { rootMargin: "120px" }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [isMobile]);
+
+  // Track container width for iframe scaling
+  useEffect(() => {
+    if (isMobile) return;
+    const el = cardRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(([entry]) => setContainerW(entry.contentRect.width));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [isMobile]);
+
+  const scale = containerW / IFRAME_NATIVE_W;
+  const visibleH = Math.round(IFRAME_NATIVE_H * scale);
+
+  const showScreenshot = p.screenshot && (!shouldLoad || !iframeLoaded);
+  const showPlaceholder = !p.screenshot && (!shouldLoad || !iframeLoaded);
+
   return (
     <motion.div
       {...fadeUp(0.12 + i * 0.12)}
@@ -114,15 +161,12 @@ function ProjectCard({ p, i }: { p: Project; i: number }) {
         style={{
           background: "#0f0f0f",
           border: "1px solid rgba(255,255,255,0.08)",
-          boxShadow:
-            "0 4px 6px rgba(0,0,0,0.06), 0 20px 60px rgba(0,0,0,0.16), 0 40px 100px rgba(0,0,0,0.10)",
+          boxShadow: "0 4px 6px rgba(0,0,0,0.06), 0 20px 60px rgba(0,0,0,0.16), 0 40px 100px rgba(0,0,0,0.10)",
         }}
       >
         {/* Tags row */}
         <div className="flex items-center gap-2 px-4 pt-4 pb-0 flex-wrap">
-          {p.tags.map((tag) => (
-            <TagPill key={tag} label={tag} />
-          ))}
+          {p.tags.map((tag) => <TagPill key={tag} label={tag} />)}
         </div>
 
         {/* Browser chrome */}
@@ -135,22 +179,28 @@ function ProjectCard({ p, i }: { p: Project; i: number }) {
           </div>
         </div>
 
-        {/* Screenshot or placeholder */}
-        <div className="relative overflow-hidden w-full" style={{ aspectRatio: "16/10" }}>
-          {p.screenshot ? (
+        {/* Preview area */}
+        <div
+          ref={cardRef}
+          className="relative overflow-hidden w-full"
+          style={{ height: isMobile ? "auto" : visibleH, aspectRatio: isMobile ? "16/10" : undefined }}
+        >
+          {/* Screenshot — shown on mobile always, on desktop until iframe loads */}
+          {(isMobile || showScreenshot) && p.screenshot && (
             // eslint-disable-next-line @next/next/no-img-element
             <img
               src={p.screenshot}
               alt={p.client}
               className="w-full h-full object-cover object-top"
+              style={{ opacity: (isMobile || !iframeLoaded) ? 1 : 0, transition: "opacity 0.4s ease" }}
             />
-          ) : (
-            /* Styled placeholder when no screenshot is available */
+          )}
+
+          {/* Placeholder when no screenshot */}
+          {showPlaceholder && (
             <div
               className="w-full h-full flex flex-col items-center justify-center gap-4"
-              style={{
-                background: "linear-gradient(135deg, #1a0a00 0%, #2d1500 50%, #1a0a00 100%)",
-              }}
+              style={{ background: "linear-gradient(135deg, #1a0a00 0%, #2d1500 50%, #1a0a00 100%)" }}
             >
               {p.avatar && (
                 // eslint-disable-next-line @next/next/no-img-element
@@ -159,20 +209,41 @@ function ProjectCard({ p, i }: { p: Project; i: number }) {
               <span className="text-white/30 text-[12px] font-mono tracking-widest">{p.domain}</span>
             </div>
           )}
+
+          {/* Live iframe — desktop only, lazy-loaded on viewport entry */}
+          {!isMobile && shouldLoad && (
+            <div
+              className="absolute top-0 left-0"
+              style={{
+                width: IFRAME_NATIVE_W,
+                height: IFRAME_NATIVE_H,
+                transform: `scale(${scale})`,
+                transformOrigin: "top left",
+                pointerEvents: "none",
+                opacity: iframeLoaded ? 1 : 0,
+                transition: "opacity 0.5s ease",
+              }}
+            >
+              <iframe
+                src={p.src}
+                title={p.client}
+                scrolling="no"
+                onLoad={() => setIframeLoaded(true)}
+                style={{ width: IFRAME_NATIVE_W, height: IFRAME_NATIVE_H, border: "none", display: "block", backgroundColor: "#fff" }}
+              />
+            </div>
+          )}
+
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-b from-transparent to-[#0f0f0f]" />
         </div>
       </div>
 
-      {/* Meta below card — avatar + name + role */}
+      {/* Meta */}
       <div className="flex items-center gap-3.5 px-1">
         <Avatar src={p.avatar} initials={p.initials} logoMode={p.logoMode} />
         <div>
-          <p className="font-heading font-black text-[18px] text-black tracking-[-0.02em] leading-tight">
-            {p.client}
-          </p>
-          <p className="mt-0.5 text-[10.5px] font-bold tracking-[0.13em] text-black/35 uppercase">
-            {p.role}
-          </p>
+          <p className="font-heading font-black text-[18px] text-black tracking-[-0.02em] leading-tight">{p.client}</p>
+          <p className="mt-0.5 text-[10.5px] font-bold tracking-[0.13em] text-black/35 uppercase">{p.role}</p>
         </div>
       </div>
     </motion.div>

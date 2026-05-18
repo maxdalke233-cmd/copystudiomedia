@@ -47,6 +47,7 @@ const projects: Project[] = [
   },
   {
     tags: ["WEBSITE", "BRANDING", "SEO"],
+    screenshot: "/images/hero-phones/site-dietz-saft.png",
     domain: "dietz-saft.de",
     client: "Dietz Saft",
     role: "FAMILIENUNTERNEHMEN · SEIT 3 GENERATIONEN",

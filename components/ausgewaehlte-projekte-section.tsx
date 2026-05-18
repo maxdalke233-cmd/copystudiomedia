@@ -112,50 +112,28 @@ function Avatar({ src, initials, logoMode }: { src?: string; initials?: string; 
 
 function ProjectCard({ p, i }: { p: Project; i: number }) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const [iframeLoaded, setIframeLoaded] = useState(false);
-  const [shouldLoad, setShouldLoad] = useState(false);
-  const [isMobile, setIsMobile] = useState(true);
   const [containerW, setContainerW] = useState(580);
+  const [liveActive, setLiveActive] = useState(false);
+  const [iframeLoaded, setIframeLoaded] = useState(false);
 
   useEffect(() => {
-    setIsMobile(window.innerWidth < 768);
-  }, []);
-
-  // Lazy-load: only start loading iframe when card enters viewport
-  useEffect(() => {
-    if (isMobile) return;
-    const el = cardRef.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setShouldLoad(true); obs.disconnect(); } },
-      { rootMargin: "120px" }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [isMobile]);
-
-  // Track container width for iframe scaling
-  useEffect(() => {
-    if (isMobile) return;
     const el = cardRef.current;
     if (!el) return;
     const ro = new ResizeObserver(([entry]) => setContainerW(entry.contentRect.width));
     ro.observe(el);
     return () => ro.disconnect();
-  }, [isMobile]);
+  }, []);
 
   const scale = containerW / IFRAME_NATIVE_W;
   const visibleH = Math.round(IFRAME_NATIVE_H * scale);
 
-  const showScreenshot = p.screenshot && (!shouldLoad || !iframeLoaded);
-  const showPlaceholder = !p.screenshot && (!shouldLoad || !iframeLoaded);
+  const hasPreview = !!p.screenshot || liveActive;
 
   return (
     <motion.div
       {...fadeUp(0.12 + i * 0.12)}
       className="flex flex-col gap-5 w-full max-w-[580px]"
     >
-      {/* Dark card */}
       <div
         className="w-full rounded-[20px] overflow-hidden"
         style={{
@@ -164,7 +142,7 @@ function ProjectCard({ p, i }: { p: Project; i: number }) {
           boxShadow: "0 4px 6px rgba(0,0,0,0.06), 0 20px 60px rgba(0,0,0,0.16), 0 40px 100px rgba(0,0,0,0.10)",
         }}
       >
-        {/* Tags row */}
+        {/* Tags */}
         <div className="flex items-center gap-2 px-4 pt-4 pb-0 flex-wrap">
           {p.tags.map((tag) => <TagPill key={tag} label={tag} />)}
         </div>
@@ -183,35 +161,35 @@ function ProjectCard({ p, i }: { p: Project; i: number }) {
         <div
           ref={cardRef}
           className="relative overflow-hidden w-full"
-          style={{ height: isMobile ? "auto" : visibleH, aspectRatio: isMobile ? "16/10" : undefined }}
+          style={{ height: visibleH || undefined, aspectRatio: visibleH ? undefined : "16/10" }}
         >
-          {/* Screenshot — shown on mobile always, on desktop until iframe loads */}
-          {(isMobile || showScreenshot) && p.screenshot && (
+          {/* Screenshot base layer */}
+          {p.screenshot && (
             // eslint-disable-next-line @next/next/no-img-element
             <img
               src={p.screenshot}
               alt={p.client}
-              className="w-full h-full object-cover object-top"
-              style={{ opacity: (isMobile || !iframeLoaded) ? 1 : 0, transition: "opacity 0.4s ease" }}
+              className="absolute inset-0 w-full h-full object-cover object-top"
+              style={{ opacity: iframeLoaded ? 0 : 1, transition: "opacity 0.5s ease" }}
             />
           )}
 
-          {/* Placeholder when no screenshot */}
-          {showPlaceholder && (
+          {/* No-screenshot placeholder */}
+          {!p.screenshot && !liveActive && (
             <div
               className="w-full h-full flex flex-col items-center justify-center gap-4"
               style={{ background: "linear-gradient(135deg, #1a0a00 0%, #2d1500 50%, #1a0a00 100%)" }}
             >
               {p.avatar && (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={p.avatar} alt={p.client} className="h-14 w-14 object-contain opacity-80" />
+                <img src={p.avatar} alt="" className="h-14 w-14 object-contain opacity-80" />
               )}
               <span className="text-white/30 text-[12px] font-mono tracking-widest">{p.domain}</span>
             </div>
           )}
 
-          {/* Live iframe — desktop only, lazy-loaded on viewport entry */}
-          {!isMobile && shouldLoad && (
+          {/* Live iframe — only rendered after user taps */}
+          {liveActive && (
             <div
               className="absolute top-0 left-0"
               style={{
@@ -232,6 +210,24 @@ function ProjectCard({ p, i }: { p: Project; i: number }) {
                 style={{ width: IFRAME_NATIVE_W, height: IFRAME_NATIVE_H, border: "none", display: "block", backgroundColor: "#fff" }}
               />
             </div>
+          )}
+
+          {/* Live-preview button — shown until iframe is ready */}
+          {!iframeLoaded && (
+            <button
+              onClick={() => setLiveActive(true)}
+              className="absolute inset-0 flex flex-col items-center justify-center gap-3 cursor-pointer"
+              style={{ background: "rgba(0,0,0,0.38)", backdropFilter: "blur(3px)", WebkitBackdropFilter: "blur(3px)" }}
+            >
+              <div className="flex items-center gap-2 rounded-full bg-white/10 border border-white/20 px-4 py-2">
+                <span className="relative flex h-2 w-2 shrink-0">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#22c55e] opacity-70" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-[#22c55e]" />
+                </span>
+                <span className="text-white text-[12px] font-bold tracking-wide">Live ansehen</span>
+              </div>
+              <span className="text-white/40 text-[10px]">Tippt zum Laden der echten Website</span>
+            </button>
           )}
 
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-b from-transparent to-[#0f0f0f]" />

@@ -51,12 +51,12 @@ function PhoneCard({ p, i, isMobile }: { p: Project; i: number; isMobile: boolea
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: yOffset + (isMobile ? 20 : 40), rotate: rotate * 2 }}
-      whileInView={{ opacity: 1, y: yOffset, rotate }}
+      initial={{ opacity: 0, y: isMobile ? 40 : 60, scale: 0.92, filter: "blur(18px)" }}
+      whileInView={{ opacity: 1, y: yOffset, scale: 1, rotate, filter: "blur(0px)" }}
       viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.7, delay: 0.1 + i * 0.12, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] }}
+      transition={{ duration: 0.85, delay: 0.1 + i * 0.15, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
       className="flex flex-col items-center gap-6"
-      style={{ willChange: "transform" }}
+      style={{ willChange: "transform, filter" }}
     >
       {/* Phone shell */}
       <div

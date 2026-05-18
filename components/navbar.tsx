@@ -1,112 +1,10 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { motion, useScroll, useSpring, AnimatePresence } from "motion/react";
 import { ArrowRight, Menu, X } from "lucide-react";
 import CopyStudioLogo from "@/components/copystudio-logo";
 
-const WA_TEXT    = "Schreib uns auf WhatsApp";
-const ICON_SIZE  = 36;   // px — collapsed circle diameter
-const PILL_W     = 252;  // px — expanded pill width
-const TYPE_MS    = 48;   // ms per character
-const HOLD_MS    = 1100; // ms to hold after typing done
-const ANIM_MS    = 420;  // ms expand / collapse
-
-type WaPhase = "idle" | "expanding" | "typing" | "holding" | "collapsing";
-
-function WhatsAppPillButton() {
-  const [phase, setPhase]   = useState<WaPhase>("idle");
-  const [chars, setChars]   = useState(0);
-  const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
-
-  const clear = () => { timers.current.forEach(clearTimeout); timers.current = []; };
-  const after = (ms: number, fn: () => void) => {
-    const id = setTimeout(fn, ms); timers.current.push(id); return id;
-  };
-
-  const runCycle = () => {
-    clear();
-    setChars(0);
-    setPhase("expanding");
-
-    /* after expand: type */
-    after(ANIM_MS, () => {
-      setPhase("typing");
-      let i = 0;
-      const tick = () => {
-        i++;
-        setChars(i);
-        if (i < WA_TEXT.length) after(TYPE_MS, tick);
-        else after(HOLD_MS, () => {
-          setPhase("collapsing");
-          after(ANIM_MS, () => { setPhase("idle"); setChars(0); });
-        });
-      };
-      after(TYPE_MS, tick);
-    });
-  };
-
-  useEffect(() => {
-    // Only animate on desktop — mobile navbar has no room for the pill
-    if (window.innerWidth < 768) return;
-    const first    = setTimeout(runCycle, 2200);
-    const interval = setInterval(runCycle, 10000);
-    return () => { clear(); clearTimeout(first); clearInterval(interval); };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const expanded  = phase !== "idle";
-  const showText  = phase === "typing" || phase === "holding";
-  const cursorOn  = phase === "typing";
-
-  return (
-    <a
-      href="https://wa.me/4915906744569"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="WhatsApp"
-      className="flex items-center h-9 rounded-full overflow-hidden shrink-0"
-      style={{
-        background: "#25D366",
-        width: expanded ? PILL_W : ICON_SIZE,
-        transition: `width ${ANIM_MS}ms cubic-bezier(0.4,0,0.2,1)`,
-        boxShadow: phase === "idle"
-          ? undefined
-          : "0 0 0 0 rgba(37,211,102,0)",
-        animation: phase === "idle" ? "whatsappPulse 2s ease-in-out infinite" : "none",
-        willChange: "width",
-      }}
-    >
-      {/* Icon — always visible, left-aligned when expanded */}
-      <span
-        className="flex items-center justify-center shrink-0"
-        style={{ width: ICON_SIZE, height: ICON_SIZE }}
-      >
-        <svg viewBox="0 0 24 24" className="h-[17px] w-[17px] fill-white">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-        </svg>
-      </span>
-
-      {/* Text — fades in after expand */}
-      <span
-        className="whitespace-nowrap text-white font-extrabold text-[11.5px] tracking-[-0.01em] overflow-hidden pr-3"
-        style={{
-          opacity: showText ? 1 : 0,
-          transition: `opacity ${showText ? 120 : 200}ms ease`,
-          maxWidth: expanded ? PILL_W - ICON_SIZE : 0,
-        }}
-      >
-        {WA_TEXT.slice(0, chars)}
-        {cursorOn && (
-          <span
-            className="inline-block w-[1.5px] h-[11px] bg-white align-middle ml-[1px]"
-            style={{ animation: "waCursor 0.55s step-end infinite" }}
-          />
-        )}
-      </span>
-    </a>
-  );
-}
 
 const navLinks = [
   { label: "Start",       id: "start"      },
@@ -249,8 +147,19 @@ export default function Navbar() {
               <ArrowRight className="h-3.5 w-3.5" />
             </a>
 
-            {/* WhatsApp button */}
-            <WhatsAppPillButton />
+            {/* WhatsApp icon */}
+            <a
+              href="https://wa.me/4915906744569"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="WhatsApp"
+              className="flex items-center justify-center h-9 w-9 rounded-full shrink-0"
+              style={{ background: "#25D366" }}
+            >
+              <svg viewBox="0 0 24 24" className="h-[17px] w-[17px] fill-white">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+            </a>
 
             {/* Hamburger — mobile */}
             <button
@@ -264,17 +173,6 @@ export default function Navbar() {
               }
             </button>
           </div>
-          <style>{`
-            @keyframes whatsappPulse {
-              0%   { box-shadow: 0 0 0 0 rgba(37,211,102,0.7), 0 0 10px rgba(37,211,102,0.4); }
-              70%  { box-shadow: 0 0 0 8px rgba(37,211,102,0), 0 0 18px rgba(37,211,102,0.15); }
-              100% { box-shadow: 0 0 0 0 rgba(37,211,102,0), 0 0 10px rgba(37,211,102,0.4); }
-            }
-            @keyframes waCursor {
-              0%, 100% { opacity: 1; }
-              50%       { opacity: 0; }
-            }
-          `}</style>
         </div>
       </header>
 

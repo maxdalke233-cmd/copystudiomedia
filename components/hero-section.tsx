@@ -114,9 +114,9 @@ function PhoneFrame({ src, shimmerDelay = "0s" }: { src: string; shimmerDelay?: 
 
 /* ── Column config ── */
 const COLUMNS = [
-  { src: "/images/hero-phones/site-copystudio.png",   cls: "hero-col-1",   left: "42%", rotate: "-7deg", duration: "180s", direction: "normal",  shimmerDelay: "0s"    },
-  { src: "/images/hero-phones/site-blitzwebsite.png", cls: "hero-col-mid", left: "62%", rotate: "-2deg", duration: "220s", direction: "reverse", shimmerDelay: "-2.3s" },
-  { src: "/images/hero-phones/site-atzor.png",        cls: "hero-col-3",   left: "80%", rotate: "-8deg", duration: "160s", direction: "normal",  shimmerDelay: "-4.6s" },
+  { src: "/images/hero-phones/site-copystudio.png",   cls: "hero-col-1",   left: "42%", rotate: "-7deg", duration: "90s",  direction: "normal",  shimmerDelay: "0s"    },
+  { src: "/images/hero-phones/site-blitzwebsite.png", cls: "hero-col-mid", left: "62%", rotate: "-2deg", duration: "110s", direction: "reverse", shimmerDelay: "-2.3s" },
+  { src: "/images/hero-phones/site-atzor.png",        cls: "hero-col-3",   left: "80%", rotate: "-8deg", duration: "75s",  direction: "normal",  shimmerDelay: "-4.6s" },
 ];
 
 const statCards = [

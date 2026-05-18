@@ -1,0 +1,172 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "HelveticaNowDisplay";
+  src: url("/fonts/HelveticaNowDisplay-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+::selection {
+  background: #ff5000;
+  color: #ffffff;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 22s linear infinite;
+  will-change: transform;
+  width: max-content;
+}
+
+
+:root {
+  --background: 0 0% 4%;
+  --foreground: 0 0% 100%;
+
+  --card: 0 0% 7%;
+  --card-foreground: 0 0% 100%;
+
+  --primary: 18 100% 50%;
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 0 0% 11%;
+  --secondary-foreground: 0 0% 100%;
+
+  --muted: 0 0% 15%;
+  --muted-foreground: 0 0% 58%;
+
+  --accent: 18 100% 50%;
+  --accent-foreground: 0 0% 100%;
+
+  --border: 0 0% 100% / 0.09;
+  --input: 0 0% 100% / 0.09;
+  --ring: 18 100% 50%;
+
+  --radius: 1rem;
+
+  /* Fluxora brand tokens */
+  --fluxora-orange: #ff5000;
+  --fluxora-orange-dark: #cc3d00;
+  --fluxora-orange-glow: rgba(255, 80, 0, 0.35);
+  --fluxora-orange-soft: rgba(255, 80, 0, 0.14);
+  --fluxora-black: #090909;
+  --fluxora-surface: #111111;
+  --fluxora-surface-2: #181818;
+  --fluxora-red-card: #b03010;
+  --glass-bg: rgba(16, 16, 16, 0.72);
+  --glass-border: rgba(255, 255, 255, 0.09);
+}
+
+html {
+  background-color: #ff5000;
+}
+
+body {
+  background-color: #090909;
+  color: #ffffff;
+}
+
+@layer components {
+  .glass-card {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.60) 0%,
+      rgba(0, 0, 0, 0.72) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.06),
+      0 16px 60px rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .glass-nav {
+    background: rgba(13, 13, 13, 0.90);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
+
+  .glass-nav-pill {
+    background: rgba(22, 22, 22, 0.70);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.06),
+      0 4px 24px rgba(0, 0, 0, 0.40);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 9999px;
+  }
+
+  .orange-button {
+    background: linear-gradient(180deg, #e85d44 0%, #c94432 100%);
+    box-shadow:
+      0 0 24px rgba(232, 93, 68, 0.45),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    font-family: "HelveticaNowDisplay", sans-serif;
+    font-weight: 800;
+  }
+
+  .fine-dark-border {
+    position: relative;
+  }
+  .fine-dark-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.14),
+      rgba(255, 255, 255, 0.04) 50%,
+      rgba(255, 255, 255, 0)
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .orange-glow-blob {
+    background: radial-gradient(
+      50% 50% at 50% 50%,
+      rgba(255, 80, 0, 0.4) 0%,
+      rgba(255, 80, 0, 0) 100%
+    );
+    filter: blur(50px);
+  }
+
+  .orange-dot-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 0.04em;
+  }
+  .orange-dot-label::before {
+    content: "•";
+    color: #ff5000;
+    font-size: 14px;
+  }
+
+  .noise-overlay {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    opacity: 0.06;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+  }
+}

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ff5000" aria-label="Fluxora">
+  <rect x="12" y="2" width="4" height="10" rx="2"/>
+  <rect x="12" y="2" width="4" height="10" rx="2" transform="rotate(90 12 12)"/>
+  <rect x="12" y="2" width="4" height="10" rx="2" transform="rotate(180 12 12)"/>
+  <rect x="12" y="2" width="4" height="10" rx="2" transform="rotate(270 12 12)"/>
+</svg>

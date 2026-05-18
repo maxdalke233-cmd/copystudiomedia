@@ -31,7 +31,7 @@ type Project = {
 const projects: Project[] = [
   {
     tags: ["WEBSITE", "COPYWRITING", "DESIGN"],
-    screenshot: "/images/hero-phones/site-atzor.png",
+    screenshot: "/images/projects/site-atzor.png",
     domain: "immobilienservice-atzor.de",
     client: "Patrick Atzor",
     role: "IMMOBILIENMAKLER · LÜBECK",
@@ -39,7 +39,7 @@ const projects: Project[] = [
   },
   {
     tags: ["WEBSITE", "DESIGN", "BRANDING"],
-    screenshot: "/images/hero-phones/site-blitzwebsite.png",
+    screenshot: "/images/projects/site-blitzwebsite.png",
     domain: "blitzwebsite.de",
     client: "Dustin Althaus",
     role: "GRÜNDER · BLITZWEBSITE",
@@ -47,7 +47,7 @@ const projects: Project[] = [
   },
   {
     tags: ["WEBSITE", "BRANDING", "SEO"],
-    screenshot: "/images/hero-phones/site-dietz-saft.png",
+    screenshot: "/images/projects/site-dietz-saft.png",
     domain: "dietz-saft.de",
     client: "Dietz Saft",
     role: "FAMILIENUNTERNEHMEN · SEIT 3 GENERATIONEN",

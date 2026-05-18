@@ -1,11 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { useEffect, useRef, useState } from "react";
 import { fadeUp } from "@/lib/motion";
-
-const IFRAME_NATIVE_W = 1280;
-const IFRAME_NATIVE_H = 860;
 
 /* Per-tag color definitions */
 const TAG_COLORS: Record<string, { border: string; text: string; bg: string }> = {
@@ -23,19 +19,19 @@ const DEFAULT_TAG = { border: "rgba(255,255,255,0.18)", text: "rgba(255,255,255,
 
 type Project = {
   tags: string[];
-  src: string;
+  screenshot?: string;  /* static image path — no iframe */
   domain: string;
   client: string;
   role: string;
-  avatar?: string;      /* path to /public/images/... — falls back to initials */
-  initials?: string;    /* shown when no avatar */
-  logoMode?: boolean;   /* true = logo image, use object-contain + white bg */
+  avatar?: string;
+  initials?: string;
+  logoMode?: boolean;
 };
 
 const projects: Project[] = [
   {
     tags: ["WEBSITE", "COPYWRITING", "DESIGN"],
-    src: "https://immobilienservice-atzor.de/",
+    screenshot: "/images/hero-phones/site-atzor.png",
     domain: "immobilienservice-atzor.de",
     client: "Patrick Atzor",
     role: "IMMOBILIENMAKLER · LÜBECK",
@@ -43,7 +39,7 @@ const projects: Project[] = [
   },
   {
     tags: ["WEBSITE", "DESIGN", "BRANDING"],
-    src: "https://blitzwebsite.de/",
+    screenshot: "/images/hero-phones/site-blitzwebsite.png",
     domain: "blitzwebsite.de",
     client: "Dustin Althaus",
     role: "GRÜNDER · BLITZWEBSITE",
@@ -51,7 +47,6 @@ const projects: Project[] = [
   },
   {
     tags: ["WEBSITE", "BRANDING", "SEO"],
-    src: "https://dietz-saft.de/",
     domain: "dietz-saft.de",
     client: "Dietz Saft",
     role: "FAMILIENUNTERNEHMEN · SEIT 3 GENERATIONEN",
@@ -108,22 +103,6 @@ function Avatar({ src, initials, logoMode }: { src?: string; initials?: string; 
 }
 
 function ProjectCard({ p, i }: { p: Project; i: number }) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [containerW, setContainerW] = useState(580);
-
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    const ro = new ResizeObserver(([entry]) => {
-      setContainerW(entry.contentRect.width);
-    });
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
-
-  const scale = containerW / IFRAME_NATIVE_W;
-  const visibleH = Math.round(IFRAME_NATIVE_H * scale);
-
   return (
     <motion.div
       {...fadeUp(0.12 + i * 0.12)}
@@ -156,34 +135,30 @@ function ProjectCard({ p, i }: { p: Project; i: number }) {
           </div>
         </div>
 
-        {/* Desktop iframe scaled to exact container width — no overflow */}
-        <div
-          ref={containerRef}
-          className="relative overflow-hidden w-full"
-          style={{ height: visibleH }}
-        >
-          <div
-            style={{
-              width: IFRAME_NATIVE_W,
-              height: IFRAME_NATIVE_H,
-              transform: `scale(${scale})`,
-              transformOrigin: "top left",
-              pointerEvents: "none",
-            }}
-          >
-            <iframe
-              src={p.src}
-              title={p.client}
-              scrolling="no"
-              style={{
-                width: IFRAME_NATIVE_W,
-                height: IFRAME_NATIVE_H,
-                border: "none",
-                display: "block",
-                backgroundColor: "#fff",
-              }}
+        {/* Screenshot or placeholder */}
+        <div className="relative overflow-hidden w-full" style={{ aspectRatio: "16/10" }}>
+          {p.screenshot ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={p.screenshot}
+              alt={p.client}
+              className="w-full h-full object-cover object-top"
             />
-          </div>
+          ) : (
+            /* Styled placeholder when no screenshot is available */
+            <div
+              className="w-full h-full flex flex-col items-center justify-center gap-4"
+              style={{
+                background: "linear-gradient(135deg, #1a0a00 0%, #2d1500 50%, #1a0a00 100%)",
+              }}
+            >
+              {p.avatar && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={p.avatar} alt={p.client} className="h-14 w-14 object-contain opacity-80" />
+              )}
+              <span className="text-white/30 text-[12px] font-mono tracking-widest">{p.domain}</span>
+            </div>
+          )}
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-b from-transparent to-[#0f0f0f]" />
         </div>
       </div>

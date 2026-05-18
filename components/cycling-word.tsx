@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
 const words = ["Stillstand.", "Durchschnitt.", "Ausreden."];
-const STAND_MS = 5000;
-const TRANSITION_S = 0.6;
+const STAND_MS = 5500;
+const TRANSITION_S = 0.85;
 
 export default function CyclingWord() {
   const [index, setIndex] = useState(0);
@@ -24,10 +24,9 @@ export default function CyclingWord() {
       <AnimatePresence mode="wait" initial={false}>
         <motion.span
           key={words[index]}
-          initial={{ y: 14, opacity: 0, filter: "blur(8px)" }}
-          animate={{ y: 0,   opacity: 1, filter: "blur(0px)" }}
-          exit={{    y: -14, opacity: 0, filter: "blur(8px)" }}
-          transition={{ duration: TRANSITION_S, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ y: 28, opacity: 0 }}
+          animate={{ y: 0, opacity: 1, transition: { duration: TRANSITION_S, ease: [0.22, 1, 0.36, 1] } }}
+          exit={{ y: -28, opacity: 0, transition: { duration: 0.22, ease: [0.4, 0, 1, 1] } }}
           className="font-serif italic font-normal inline-block"
         >
           {words[index]}

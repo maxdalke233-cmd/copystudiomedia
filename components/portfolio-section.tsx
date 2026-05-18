@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion } from "motion/react";
+import { motion, useAnimation } from "motion/react";
 import { fadeUp } from "@/lib/motion";
 
 const PHONE_W = 400;
@@ -10,9 +10,18 @@ const MOBILE_W = 270;
 const MOBILE_H = Math.round(PHONE_H * (MOBILE_W / PHONE_W)); // 540
 const MOBILE_SCALE = MOBILE_W / PHONE_W; // 0.675
 
-const projects = [
+type Project = {
+  type: "iframe";
+  src: string;
+  title: string;
+  domain: string;
+  year: string;
+  tags: string[];
+};
+
+const projects: Project[] = [
   {
-    type: "iframe" as const,
+    type: "iframe",
     src: "https://immobilienservice-atzor.de/",
     title: "Immobilienservice Atzor",
     domain: "immobilienservice-atzor.de",
@@ -20,7 +29,7 @@ const projects = [
     tags: ["Immobilien", "Dienstleistung", "B2C"],
   },
   {
-    type: "iframe" as const,
+    type: "iframe",
     src: "https://copystudio.marketing/",
     title: "CopyStudio Marketing",
     domain: "copystudio.marketing",
@@ -28,6 +37,159 @@ const projects = [
     tags: ["Agentur", "Performance Copy", "B2B"],
   },
 ];
+
+function PhoneCard({ p, i, isMobile }: { p: Project; i: number; isMobile: boolean }) {
+  const [hovered, setHovered] = useState(false);
+  const controls = useAnimation();
+
+  const pw = isMobile ? MOBILE_W : PHONE_W;
+  const ph = isMobile ? MOBILE_H : PHONE_H;
+  const rotate = isMobile ? 0 : i === 0 ? -5 : 5;
+  const yOffset = isMobile ? 0 : i === 0 ? 40 : -40;
+  const glowShadow =
+    i === 1
+      ? "0 44px 100px rgba(0,0,0,0.30), 0 8px 24px rgba(0,0,0,0.16), 0 0 70px rgba(255,80,0,0.14)"
+      : "0 44px 100px rgba(0,0,0,0.30), 0 8px 24px rgba(0,0,0,0.16)";
+
+  useEffect(() => {
+    if (hovered) {
+      controls.stop();
+    } else {
+      controls.start({
+        y: [0, -320, -320, 0],
+        transition: {
+          duration: 16,
+          repeat: Infinity,
+          ease: [0.42, 0, 0.58, 1] as [number, number, number, number],
+          times: [0, 0.44, 0.56, 1],
+        },
+      });
+    }
+  }, [hovered, controls]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: yOffset + (isMobile ? 20 : 40), rotate: rotate * 2 }}
+      whileInView={{ opacity: 1, y: yOffset, rotate }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.7, delay: 0.1 + i * 0.12, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] }}
+      className="flex flex-col items-center gap-6"
+      style={{ willChange: "transform" }}
+    >
+      {/* Phone shell */}
+      <div
+        className="relative overflow-hidden rounded-[40px] border-[3px] border-black/85 bg-black cursor-pointer"
+        style={{
+          width: pw,
+          height: ph,
+          boxShadow: glowShadow,
+          willChange: "transform",
+          backfaceVisibility: "hidden",
+          WebkitBackfaceVisibility: "hidden",
+          transform: "translateZ(0)",
+        }}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        {/* Dynamic island */}
+        <div className="absolute top-0 inset-x-0 z-20 flex justify-center pt-[10px] pointer-events-none">
+          <div className="h-[22px] w-[90px] rounded-full bg-black" />
+        </div>
+
+        {/* Scrolling iframe wrapper */}
+        <motion.div
+          animate={controls}
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: PHONE_W,
+            height: PHONE_H * 2.5,
+          }}
+        >
+          <iframe
+            src={p.src}
+            title={p.title}
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: PHONE_W,
+              height: PHONE_H * 2.5,
+              border: "none",
+              display: "block",
+              backgroundColor: "#fff",
+              transform: isMobile ? `scale(${MOBILE_SCALE})` : "translateZ(0)",
+              transformOrigin: "top left",
+              willChange: "transform",
+              pointerEvents: hovered ? "auto" : "none",
+            }}
+            scrolling="no"
+          />
+        </motion.div>
+
+        {/* Blur + hint overlay */}
+        <motion.div
+          animate={{ opacity: hovered ? 0 : 1 }}
+          transition={{ duration: 0.3 }}
+          onClick={() => setHovered(true)}
+          className="absolute inset-0 z-10 flex flex-col items-center justify-center rounded-[37px]"
+          style={{
+            backdropFilter: "blur(5px)",
+            WebkitBackdropFilter: "blur(5px)",
+            background: "rgba(0,0,0,0.42)",
+            pointerEvents: hovered ? "none" : "auto",
+          }}
+        >
+          {/* Mouse scroll icon */}
+          <svg
+            viewBox="0 0 28 38"
+            className="w-7 h-9 mb-3"
+            fill="none"
+            stroke="rgba(255,255,255,0.85)"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <rect x="1" y="1" width="26" height="22" rx="13" />
+            <line x1="14" y1="6" x2="14" y2="10" />
+            <polyline points="9,30 14,36 19,30" />
+            <line x1="14" y1="24" x2="14" y2="30" />
+          </svg>
+          <p className="text-white text-[13px] font-bold tracking-wide">Live-Vorschau</p>
+          <p className="text-white/55 text-[11px] mt-1.5 text-center px-8 leading-relaxed">
+            Hover oder tippe zum Interagieren
+          </p>
+        </motion.div>
+
+        {/* Bottom home indicator */}
+        <div className="absolute bottom-2 inset-x-0 z-20 flex justify-center pointer-events-none">
+          <div className="h-1 w-24 rounded-full bg-white/30" />
+        </div>
+
+        {/* Subtle inner shadow */}
+        <div className="absolute inset-0 rounded-[37px] pointer-events-none shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)]" />
+      </div>
+
+      {/* Project meta */}
+      <div className="text-center">
+        <p className="font-heading font-black text-[16px] text-black tracking-[-0.01em]">{p.title}</p>
+        <p className="text-[12px] text-black/38 mt-0.5">{p.domain}</p>
+        <div className="flex items-center gap-1.5 justify-center mt-2.5 flex-wrap">
+          {p.tags.map((tag) => (
+            <span
+              key={tag}
+              className="rounded-full border border-black/15 bg-black/[0.05] px-2.5 py-0.5 text-[10px] font-semibold text-black/50 tracking-wide"
+            >
+              {tag}
+            </span>
+          ))}
+          <span className="text-[10px] text-black/25 ml-0.5">{p.year}</span>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
 
 export default function PortfolioSection() {
   const [isMobile, setIsMobile] = useState(false);
@@ -84,112 +246,9 @@ export default function PortfolioSection() {
             gap: isMobile ? 40 : 80,
           }}
         >
-          {projects.map((p, i) => {
-            const rotate = isMobile ? 0 : i === 0 ? -5 : 5;
-            const yOffset = isMobile ? 0 : i === 0 ? 40 : -40;
-            const pw = isMobile ? MOBILE_W : PHONE_W;
-            const ph = isMobile ? MOBILE_H : PHONE_H;
-            const glowShadow =
-              i === 1
-                ? "0 44px 100px rgba(0,0,0,0.30), 0 8px 24px rgba(0,0,0,0.16), 0 0 70px rgba(255,80,0,0.14)"
-                : "0 44px 100px rgba(0,0,0,0.30), 0 8px 24px rgba(0,0,0,0.16)";
-
-            return (
-              <motion.div
-                key={p.domain}
-                initial={{ opacity: 0, y: yOffset + (isMobile ? 20 : 40), rotate: rotate * 2 }}
-                whileInView={{ opacity: 1, y: yOffset, rotate }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.7, delay: 0.1 + i * 0.12, ease: "easeOut" }}
-                className="flex flex-col items-center gap-6"
-                style={{ willChange: "transform" }}
-              >
-                {/* Phone shell */}
-                <div
-                  className="relative overflow-hidden rounded-[40px] border-[3px] border-black/85 bg-black"
-                  style={{
-                    width: pw,
-                    height: ph,
-                    boxShadow: glowShadow,
-                    willChange: "transform",
-                    backfaceVisibility: "hidden",
-                    WebkitBackfaceVisibility: "hidden",
-                    transform: "translateZ(0)",
-                  }}
-                >
-                  {/* Dynamic island */}
-                  <div className="absolute top-0 inset-x-0 z-20 flex justify-center pt-[10px] pointer-events-none">
-                    <div className="h-[22px] w-[90px] rounded-full bg-black" />
-                  </div>
-
-                  {p.type === "screenshot" ? (
-                    <>
-                      <motion.img
-                        src={p.src}
-                        alt={p.title}
-                        style={{ width: "100%", display: "block" }}
-                        animate={{ y: ["0%", "-50%", "-50%", "0%"] }}
-                        transition={{
-                          duration: 8,
-                          delay: i * 2,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                          times: [0, 0.44, 0.56, 1],
-                        }}
-                      />
-                      <div className="absolute top-0 inset-x-0 h-16 bg-gradient-to-b from-black to-transparent pointer-events-none z-10" />
-                      <div className="absolute bottom-0 inset-x-0 h-16 bg-gradient-to-t from-black to-transparent pointer-events-none z-10" />
-                    </>
-                  ) : (
-                    /* iframe: always render at full PHONE_W; scale down on mobile */
-                    <iframe
-                      src={p.src}
-                      title={p.title}
-                      style={{
-                        position: "absolute",
-                        top: 0,
-                        left: 0,
-                        width: PHONE_W,
-                        height: PHONE_H,
-                        border: "none",
-                        display: "block",
-                        backgroundColor: "#fff",
-                        transform: isMobile ? `scale(${MOBILE_SCALE})` : "translateZ(0)",
-                        transformOrigin: "top left",
-                        willChange: "transform",
-                      }}
-                      scrolling="yes"
-                    />
-                  )}
-
-                  {/* Bottom home indicator */}
-                  <div className="absolute bottom-2 inset-x-0 z-20 flex justify-center pointer-events-none">
-                    <div className="h-1 w-24 rounded-full bg-white/30" />
-                  </div>
-
-                  {/* Subtle inner shadow */}
-                  <div className="absolute inset-0 rounded-[37px] pointer-events-none shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)]" />
-                </div>
-
-                {/* Project meta */}
-                <div className="text-center">
-                  <p className="font-heading font-black text-[16px] text-black tracking-[-0.01em]">{p.title}</p>
-                  <p className="text-[12px] text-black/38 mt-0.5">{p.domain}</p>
-                  <div className="flex items-center gap-1.5 justify-center mt-2.5 flex-wrap">
-                    {p.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-full border border-black/15 bg-black/[0.05] px-2.5 py-0.5 text-[10px] font-semibold text-black/50 tracking-wide"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                    <span className="text-[10px] text-black/25 ml-0.5">{p.year}</span>
-                  </div>
-                </div>
-              </motion.div>
-            );
-          })}
+          {projects.map((p, i) => (
+            <PhoneCard key={p.domain} p={p} i={i} isMobile={isMobile} />
+          ))}
         </div>
 
         {/* CTA block */}

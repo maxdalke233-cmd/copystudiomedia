@@ -373,12 +373,15 @@ export default function NextStepsSection() {
         </div>
 
         <div className="flex justify-center mt-12">
-          <button
-            className="orange-button rounded-xl px-10 py-4 text-[12px] font-extrabold tracking-[0.08em] uppercase text-white hover:scale-[1.02] transition-all duration-200"
+          <a
+            href="https://calendly.com/maxdalke233/30min"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="orange-button rounded-xl px-10 py-4 text-[12px] font-extrabold tracking-[0.08em] uppercase text-white hover:scale-[1.02] transition-all duration-200 inline-block"
             style={{ boxShadow: "0 8px 40px rgba(232,93,68,0.45), 0 2px 12px rgba(232,93,68,0.30)" }}
           >
             Jetzt kostenloses Erstgespräch sichern
-          </button>
+          </a>
         </div>
 
       </div>

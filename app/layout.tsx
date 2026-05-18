@@ -47,8 +47,9 @@ export default function RootLayout({
     <html
       lang="en"
       className={`dark ${nunito.variable} ${bricolage.variable} ${inter.variable} ${instrumentSerif.variable}`}
+      suppressHydrationWarning
     >
-      <body className="font-body bg-[#090909] text-white antialiased">
+      <body className="font-body bg-[#090909] text-white antialiased" suppressHydrationWarning>
         {children}
       </body>
     </html>

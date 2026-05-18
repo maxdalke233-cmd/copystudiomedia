@@ -170,11 +170,11 @@ export default function VergleichSection() {
           {/* Right — CopyStudio */}
           <SpinBorderCard accent={true} delay={0.12}>
             <div className="p-8">
-              <div className="mb-6 flex justify-start">
+              <div className="mb-6 flex justify-start overflow-hidden" style={{ height: 52 }}>
                 <img
-                  src="/images/copystudio-wordmark.png"
-                  alt="CopyStudio Media"
-                  style={{ height: 28, width: "auto", objectFit: "contain", display: "block" }}
+                  src="/images/logo-copystudio.png"
+                  alt="CopyStudio Web"
+                  style={{ height: 130, width: "auto", marginTop: -38, marginBottom: -40, display: "block" }}
                 />
               </div>
               <ul className="space-y-4">
@@ -192,12 +192,15 @@ export default function VergleichSection() {
 
         {/* CTA Button */}
         <div className="flex justify-center mt-12">
-          <button
-            className="orange-button rounded-full px-16 py-5 text-[15px] font-extrabold tracking-[0.04em] uppercase text-white hover:scale-[1.03] transition-all duration-200"
+          <a
+            href="https://calendly.com/maxdalke233/30min"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="orange-button rounded-full px-16 py-5 text-[15px] font-extrabold tracking-[0.04em] uppercase text-white hover:scale-[1.03] transition-all duration-200 inline-block"
             style={{ boxShadow: "0 12px 50px rgba(255,80,0,0.5), 0 3px 16px rgba(255,80,0,0.3)" }}
           >
             Jetzt kostenloses Erstgespräch sichern
-          </button>
+          </a>
         </div>
 
       </div>

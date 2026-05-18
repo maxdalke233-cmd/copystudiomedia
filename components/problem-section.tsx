@@ -51,13 +51,16 @@ export default function ProblemSection() {
 
         {/* CTA Button */}
         <div className="flex justify-center mt-10">
-          <button
+          <a
+            href="https://calendly.com/maxdalke233/30min"
+            target="_blank"
+            rel="noopener noreferrer"
             className="orange-button rounded-full px-16 py-5 text-[17px] font-extrabold text-white flex items-center gap-3 hover:scale-[1.03] transition-all duration-200"
             style={{ boxShadow: "0 12px 50px rgba(255,80,0,0.55), 0 3px 16px rgba(255,80,0,0.35)" }}
           >
             Jetzt kostenloses Erstgespräch sichern — ohne Risiko
             <span style={{ fontSize: "19px" }}>→</span>
-          </button>
+          </a>
         </div>
 
       </div>

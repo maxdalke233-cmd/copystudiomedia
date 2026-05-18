@@ -23,12 +23,15 @@ export default function CtaSection() {
         </p>
 
         {/* CTA Button */}
-        <button
-          className="orange-button rounded-xl px-12 py-4 text-[13px] font-extrabold tracking-[0.08em] uppercase text-white hover:scale-[1.02] transition-all duration-200"
+        <a
+          href="https://calendly.com/maxdalke233/30min"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="orange-button rounded-xl px-12 py-4 text-[13px] font-extrabold tracking-[0.08em] uppercase text-white hover:scale-[1.02] transition-all duration-200 inline-block"
           style={{ boxShadow: "0 8px 40px rgba(255,80,0,0.45), 0 2px 12px rgba(255,80,0,0.30)" }}
         >
           Jetzt kostenloses Erstgespräch sichern
-        </button>
+        </a>
 
       </div>
     </section>

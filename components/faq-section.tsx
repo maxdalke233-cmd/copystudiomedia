@@ -90,9 +90,14 @@ export default function FaqSection() {
             </p>
 
             <div className="mt-8 flex justify-center lg:justify-start">
-              <button className="orange-button rounded-full px-6 py-3 text-[13px] font-extrabold text-white hover:scale-[1.02] transition-all duration-200">
+              <a
+                href="https://calendly.com/maxdalke233/30min"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="orange-button rounded-full px-6 py-3 text-[13px] font-extrabold text-white hover:scale-[1.02] transition-all duration-200 inline-block"
+              >
                 Erstgespräch sichern →
-              </button>
+              </a>
             </div>
           </motion.div>
 

@@ -2,6 +2,7 @@ import Navbar from "@/components/navbar";
 import HeroSection from "@/components/hero-section";
 import ProblemSection from "@/components/problem-section";
 import PartnerStrip from "@/components/partner-strip";
+import AusgewaehlteProjekteSection from "@/components/ausgewaehlte-projekte-section";
 import VideoTestimonialSection from "@/components/video-testimonial-section";
 import PortfolioSection from "@/components/portfolio-section";
 import MeetMindsSection from "@/components/meet-minds-section";
@@ -17,14 +18,15 @@ export default function Page() {
     <div className="min-h-screen bg-[#090909] text-white font-body" style={{ overflowX: "clip" }}>
       <Navbar />
       <main>
-        <section id="problem"><HeroSection /></section>
+        <section id="start"><HeroSection /></section>
         <PartnerStrip />
-        <PortfolioSection />
-<section id="leistungen"><ScrollCardsSection /></section>
-        <VideoTestimonialSection />
-        <section id="methode"><VergleichSection /></section>
-        <section id="vergleich"><MeetMindsSection /></section>
-        <section id="ueber-uns"><NextStepsSection /></section>
+        <section id="projekte"><PortfolioSection /></section>
+        <section id="leistungen"><ScrollCardsSection /></section>
+        <AusgewaehlteProjekteSection />
+        <section id="referenzen"><VideoTestimonialSection /></section>
+        <VergleichSection />
+        <section id="ueber-uns"><MeetMindsSection /></section>
+        <NextStepsSection />
         <section id="faq"><FaqSection /></section>
         <CtaSection />
       </main>

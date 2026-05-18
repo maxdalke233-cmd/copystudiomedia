@@ -315,9 +315,14 @@ export default function BenefitsSection() {
 
         {/* CTA Button */}
         <motion.div {...fadeUp(0.4)} className="mt-12 flex justify-center">
-          <button className="orange-button rounded-full px-8 py-4 text-[13px] font-extrabold tracking-[0.12em] uppercase text-white hover:scale-[1.03] transition-all duration-200">
+          <a
+            href="https://calendly.com/maxdalke233/30min"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="orange-button rounded-full px-8 py-4 text-[13px] font-extrabold tracking-[0.12em] uppercase text-white hover:scale-[1.03] transition-all duration-200 inline-block"
+          >
             Jetzt kostenloses Erstgespräch sichern
-          </button>
+          </a>
         </motion.div>
 
       </div>

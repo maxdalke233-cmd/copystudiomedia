@@ -1,14 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, useAnimation } from "motion/react";
+import { motion } from "motion/react";
 import { fadeUp } from "@/lib/motion";
 
 const PHONE_W = 400;
 const PHONE_H = 800;
 const MOBILE_W = 270;
 const MOBILE_H = Math.round(PHONE_H * (MOBILE_W / PHONE_W)); // 540
-const MOBILE_SCALE = MOBILE_W / PHONE_W; // 0.675
 
 type Project = {
   type: "iframe";
@@ -40,7 +39,6 @@ const projects: Project[] = [
 
 function PhoneCard({ p, i, isMobile }: { p: Project; i: number; isMobile: boolean }) {
   const [hovered, setHovered] = useState(false);
-  const controls = useAnimation();
 
   const pw = isMobile ? MOBILE_W : PHONE_W;
   const ph = isMobile ? MOBILE_H : PHONE_H;
@@ -50,22 +48,6 @@ function PhoneCard({ p, i, isMobile }: { p: Project; i: number; isMobile: boolea
     i === 1
       ? "0 44px 100px rgba(0,0,0,0.30), 0 8px 24px rgba(0,0,0,0.16), 0 0 70px rgba(255,80,0,0.14)"
       : "0 44px 100px rgba(0,0,0,0.30), 0 8px 24px rgba(0,0,0,0.16)";
-
-  useEffect(() => {
-    if (hovered) {
-      controls.stop();
-    } else {
-      controls.start({
-        y: [0, -320, -320, 0],
-        transition: {
-          duration: 16,
-          repeat: Infinity,
-          ease: [0.42, 0, 0.58, 1] as [number, number, number, number],
-          times: [0, 0.44, 0.56, 1],
-        },
-      });
-    }
-  }, [hovered, controls]);
 
   return (
     <motion.div
@@ -83,10 +65,9 @@ function PhoneCard({ p, i, isMobile }: { p: Project; i: number; isMobile: boolea
           width: pw,
           height: ph,
           boxShadow: glowShadow,
-          willChange: "transform",
-          backfaceVisibility: "hidden",
-          WebkitBackfaceVisibility: "hidden",
-          transform: "translateZ(0)",
+          borderRadius: 40,
+          WebkitMaskImage: "radial-gradient(white, white)",
+          maskImage: "radial-gradient(white, white)",
         }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
@@ -96,37 +77,25 @@ function PhoneCard({ p, i, isMobile }: { p: Project; i: number; isMobile: boolea
           <div className="h-[22px] w-[90px] rounded-full bg-black" />
         </div>
 
-        {/* Scrolling iframe wrapper */}
-        <motion.div
-          animate={controls}
+        {/* iframe — always rendered at PHONE_W×PHONE_H for correct 100vh,
+             scaled down on mobile to fit the smaller phone shell */}
+        <iframe
+          src={p.src}
+          title={p.title}
           style={{
             position: "absolute",
             top: 0,
             left: 0,
             width: PHONE_W,
-            height: PHONE_H * 2.5,
+            height: PHONE_H,
+            border: "none",
+            display: "block",
+            backgroundColor: "#fff",
+            transform: isMobile ? `scale(${MOBILE_W / PHONE_W})` : undefined,
+            transformOrigin: "top left",
+            pointerEvents: hovered ? "auto" : "none",
           }}
-        >
-          <iframe
-            src={p.src}
-            title={p.title}
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: PHONE_W,
-              height: PHONE_H * 2.5,
-              border: "none",
-              display: "block",
-              backgroundColor: "#fff",
-              transform: isMobile ? `scale(${MOBILE_SCALE})` : "translateZ(0)",
-              transformOrigin: "top left",
-              willChange: "transform",
-              pointerEvents: hovered ? "auto" : "none",
-            }}
-            scrolling="no"
-          />
-        </motion.div>
+        />
 
         {/* Blur + hint overlay */}
         <motion.div
@@ -156,7 +125,7 @@ function PhoneCard({ p, i, isMobile }: { p: Project; i: number; isMobile: boolea
             <polyline points="9,30 14,36 19,30" />
             <line x1="14" y1="24" x2="14" y2="30" />
           </svg>
-          <p className="text-white text-[13px] font-bold tracking-wide">Live-Vorschau</p>
+          <p className="text-white text-[15px] font-black tracking-wide">Live-Vorschau</p>
           <p className="text-white/55 text-[11px] mt-1.5 text-center px-8 leading-relaxed">
             Hover oder tippe zum Interagieren
           </p>
@@ -263,8 +232,11 @@ export default function PortfolioSection() {
           </p>
           <div className="h-px w-full bg-[#e85d44]/40" />
           <div className="flex justify-center mt-8">
-            <button
-              className="group relative overflow-hidden rounded-xl px-10 py-4 text-[13px] font-extrabold font-heading tracking-[0.12em] uppercase text-white transition-all duration-300 hover:scale-[1.04] hover:shadow-[0_0_40px_rgba(232,93,68,0.6),0_0_80px_rgba(232,93,68,0.25)] active:scale-[0.97]"
+            <a
+              href="https://calendly.com/maxdalke233/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative overflow-hidden rounded-xl px-10 py-4 text-[13px] font-extrabold font-heading tracking-[0.12em] uppercase text-white transition-all duration-300 hover:scale-[1.04] hover:shadow-[0_0_40px_rgba(232,93,68,0.6),0_0_80px_rgba(232,93,68,0.25)] active:scale-[0.97] inline-block"
               style={{
                 background: "linear-gradient(180deg, #e85d44 0%, #c94432 100%)",
                 boxShadow: "0 0 24px rgba(232, 93, 68, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.15)",
@@ -277,7 +249,7 @@ export default function PortfolioSection() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
                 </svg>
               </span>
-            </button>
+            </a>
           </div>
         </motion.div>
 

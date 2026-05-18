@@ -34,7 +34,7 @@ export default function VideoTestimonialSection() {
           <br className="hidden md:block" />
           {" "}die wirklich wachsen wollen, sich für{" "}
           <br className="hidden md:block" />
-          <span className="font-black">CopyStudio Media</span> entscheiden.
+          <span className="font-black">CopyStudio Web</span> entscheiden.
         </motion.h2>
 
         {/* Subtitle */}
@@ -72,13 +72,13 @@ export default function VideoTestimonialSection() {
           {/* Below video: name + logo */}
           <div className="flex items-center justify-between border-t border-gray-100 bg-white px-6 py-4">
             <div>
-              <p className="text-[14px] font-semibold text-[#111]">Niki Dalke</p>
+              <p className="text-[14px] font-semibold text-[#111]">Maxim Dalke</p>
               <p className="text-[12px] text-gray-400">Geschäftsführer</p>
             </div>
             <img
-              src="/images/copystudio-logo-full.png"
-              alt="CopyStudio Media"
-              style={{ height: 32, width: "auto", objectFit: "contain", flexShrink: 0 }}
+              src="/images/copystudio-web-logo-dark.png"
+              alt="CopyStudio Web"
+              style={{ height: 48, width: "auto", objectFit: "contain", flexShrink: 0 }}
             />
           </div>
         </motion.div>
@@ -124,7 +124,7 @@ export default function VideoTestimonialSection() {
               <p className="text-[14px] leading-[1.75] text-[#3a1a10] italic">
                 „Seitdem wir zusammenarbeiten, spüre ich, wie sich das Engagement in meiner Zielgruppe verändert hat – wie ich es selbst nach Jahren in der Branche nicht erreicht habe."
               </p>
-              <p className="mt-3 text-[12px] font-semibold text-[#3a1a10]">— Niki Dalke</p>
+              <p className="mt-3 text-[12px] font-semibold text-[#3a1a10]">— Maxim Dalke</p>
             </div>
           </div>
         </motion.div>
@@ -146,7 +146,7 @@ export default function VideoTestimonialSection() {
             </p>
             <footer className="mt-6 flex items-center justify-center gap-3">
               <div className="h-px w-10 bg-gray-200" />
-              <p className="text-[14px] font-semibold text-[#111]">Niki Dalke</p>
+              <p className="text-[14px] font-semibold text-[#111]">Maxim Dalke</p>
               <div className="h-px w-10 bg-gray-200" />
             </footer>
           </blockquote>
@@ -160,9 +160,14 @@ export default function VideoTestimonialSection() {
           transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
           className="mt-12 flex justify-center"
         >
-          <button className="orange-button rounded-full px-8 py-4 text-[13px] font-extrabold tracking-[0.12em] uppercase text-white hover:scale-[1.03] transition-all duration-200 shadow-[0_8px_40px_rgba(255,80,0,0.3)]">
+          <a
+            href="https://calendly.com/maxdalke233/30min"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="orange-button rounded-full px-8 py-4 text-[13px] font-extrabold tracking-[0.12em] uppercase text-white hover:scale-[1.03] transition-all duration-200 shadow-[0_8px_40px_rgba(255,80,0,0.3)] inline-block"
+          >
             Jetzt kostenloses Erstgespräch sichern
-          </button>
+          </a>
         </motion.div>
 
       </div>

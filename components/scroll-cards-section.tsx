@@ -750,9 +750,15 @@ export default function ScrollCardsSection() {
         </div>
 
         <div className="absolute bottom-0 left-0 right-0 z-10 flex justify-center px-6 py-16">
-          <button className="orange-button rounded-xl px-10 py-4 text-[12px] font-extrabold tracking-[0.08em] uppercase text-white hover:scale-[1.02] transition-all duration-200" style={{ boxShadow: "0 8px 40px rgba(255,80,0,0.45), 0 2px 12px rgba(255,80,0,0.30)" }}>
+          <a
+            href="https://calendly.com/maxdalke233/30min"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="orange-button rounded-xl px-10 py-4 text-[12px] font-extrabold tracking-[0.08em] uppercase text-white hover:scale-[1.02] transition-all duration-200 inline-block"
+            style={{ boxShadow: "0 8px 40px rgba(255,80,0,0.45), 0 2px 12px rgba(255,80,0,0.30)" }}
+          >
             Jetzt kostenloses Erstgespräch sichern
-          </button>
+          </a>
         </div>
       </section>
 
@@ -838,9 +844,15 @@ export default function ScrollCardsSection() {
 
         {/* CTA */}
         <div className="mt-10 flex justify-center px-4">
-          <button className="orange-button rounded-xl px-8 py-4 text-[12px] font-extrabold tracking-[0.08em] uppercase text-white w-full max-w-[340px]" style={{ boxShadow: "0 8px 40px rgba(255,80,0,0.45)" }}>
+          <a
+            href="https://calendly.com/maxdalke233/30min"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="orange-button rounded-xl px-8 py-4 text-[12px] font-extrabold tracking-[0.08em] uppercase text-white w-full max-w-[340px] inline-block text-center"
+            style={{ boxShadow: "0 8px 40px rgba(255,80,0,0.45)" }}
+          >
             Jetzt kostenloses Erstgespräch sichern
-          </button>
+          </a>
         </div>
       </section>
     </>

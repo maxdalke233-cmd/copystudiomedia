@@ -80,8 +80,10 @@ export default function VideoTestimonialSection() {
             <video
               ref={videoRef}
               src="/videos/testimonial.mp4"
+              poster="/videos/testimonial-poster.jpg"
               className="absolute inset-0 w-full h-full object-cover"
               playsInline
+              preload="metadata"
               onEnded={() => setIsPlaying(false)}
             />
             {/* Play button overlay — hidden while playing */}

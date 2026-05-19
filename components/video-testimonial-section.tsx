@@ -1,8 +1,23 @@
 "use client";
 
-import { motion } from "motion/react";
+import { useRef, useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
 
 export default function VideoTestimonialSection() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const togglePlay = () => {
+    const v = videoRef.current;
+    if (!v) return;
+    if (v.paused) {
+      v.play();
+      setIsPlaying(true);
+    } else {
+      v.pause();
+      setIsPlaying(false);
+    }
+  };
   return (
     <section className="relative bg-white pt-10 pb-24 md:pt-12 md:pb-32">
 
@@ -56,17 +71,37 @@ export default function VideoTestimonialSection() {
           transition={{ duration: 0.65, delay: 0.15, ease: "easeOut" }}
           className="mt-12 overflow-hidden rounded-2xl shadow-[0_24px_80px_rgba(0,0,0,0.14)]"
         >
-          {/* Black video area */}
-          <div className="relative w-full bg-black" style={{ aspectRatio: "16/9" }}>
-            {/* Play button */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#ff5000] shadow-[0_0_40px_rgba(255,80,0,0.45)] transition-transform duration-200 hover:scale-110 cursor-pointer">
-                {/* Triangle */}
-                <svg viewBox="0 0 24 24" className="h-8 w-8 translate-x-0.5 fill-white">
-                  <polygon points="6,4 20,12 6,20" />
-                </svg>
-              </div>
-            </div>
+          {/* Video area */}
+          <div
+            className="relative w-full bg-black cursor-pointer"
+            style={{ aspectRatio: "16/9" }}
+            onClick={togglePlay}
+          >
+            <video
+              ref={videoRef}
+              src="/videos/testimonial.mp4"
+              className="absolute inset-0 w-full h-full object-cover"
+              playsInline
+              onEnded={() => setIsPlaying(false)}
+            />
+            {/* Play button overlay — hidden while playing */}
+            <AnimatePresence>
+              {!isPlaying && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.85 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.85 }}
+                  transition={{ duration: 0.18 }}
+                  className="absolute inset-0 flex items-center justify-center"
+                >
+                  <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#ff5000] shadow-[0_0_40px_rgba(255,80,0,0.45)] transition-transform duration-200 hover:scale-110">
+                    <svg viewBox="0 0 24 24" className="h-8 w-8 translate-x-0.5 fill-white">
+                      <polygon points="6,4 20,12 6,20" />
+                    </svg>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           {/* Below video: name + logo */}

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { fadeUp } from "@/lib/motion";
+import Image from "next/image";
 
 const PHONE_W = 400;
 const PHONE_H = 800;
@@ -10,8 +11,8 @@ const MOBILE_W = 270;
 const MOBILE_H = Math.round(PHONE_H * (MOBILE_W / PHONE_W)); // 540
 
 type Project = {
-  type: "iframe";
   src: string;
+  screenshot: string;
   title: string;
   domain: string;
   year: string;
@@ -20,16 +21,16 @@ type Project = {
 
 const projects: Project[] = [
   {
-    type: "iframe",
     src: "https://immobilienservice-atzor.de/",
+    screenshot: "/images/hero-phones/site-atzor.png",
     title: "Immobilienservice Atzor",
     domain: "immobilienservice-atzor.de",
     year: "2025",
     tags: ["Immobilien", "Dienstleistung", "B2C"],
   },
   {
-    type: "iframe",
     src: "https://copystudio.marketing/",
+    screenshot: "/images/hero-phones/site-copystudio.png",
     title: "CopyStudio Marketing",
     domain: "copystudio.marketing",
     year: "2025",
@@ -77,59 +78,70 @@ function PhoneCard({ p, i, isMobile }: { p: Project; i: number; isMobile: boolea
           <div className="h-[22px] w-[90px] rounded-full bg-black" />
         </div>
 
-        {/* iframe — always rendered at PHONE_W×PHONE_H for correct 100vh,
-             scaled down on mobile to fit the smaller phone shell */}
-        <iframe
-          src={p.src}
-          title={p.title}
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: PHONE_W,
-            height: PHONE_H,
-            border: "none",
-            display: "block",
-            backgroundColor: "#fff",
-            transform: isMobile ? `scale(${MOBILE_W / PHONE_W})` : undefined,
-            transformOrigin: "top left",
-            pointerEvents: hovered ? "auto" : "none",
-          }}
+        {/* Screenshot */}
+        <Image
+          src={p.screenshot}
+          alt={p.title}
+          fill
+          sizes={`${PHONE_W}px`}
+          className="object-cover object-top"
+          priority={i === 0}
         />
 
-        {/* Blur + hint overlay */}
+        {/* Hover overlay — fades out on hover, links to live site */}
         <motion.div
           animate={{ opacity: hovered ? 0 : 1 }}
           transition={{ duration: 0.3 }}
-          onClick={() => setHovered(true)}
           className="absolute inset-0 z-10 flex flex-col items-center justify-center rounded-[37px]"
           style={{
-            backdropFilter: "blur(5px)",
-            WebkitBackdropFilter: "blur(5px)",
-            background: "rgba(0,0,0,0.42)",
+            backdropFilter: "blur(4px)",
+            WebkitBackdropFilter: "blur(4px)",
+            background: "rgba(0,0,0,0.38)",
             pointerEvents: hovered ? "none" : "auto",
           }}
         >
-          {/* Mouse scroll icon */}
+          {/* External link icon */}
           <svg
-            viewBox="0 0 28 38"
-            className="w-7 h-9 mb-3"
+            viewBox="0 0 24 24"
+            className="w-7 h-7 mb-3"
             fill="none"
             stroke="rgba(255,255,255,0.85)"
             strokeWidth="1.8"
             strokeLinecap="round"
             strokeLinejoin="round"
           >
-            <rect x="1" y="1" width="26" height="22" rx="13" />
-            <line x1="14" y1="6" x2="14" y2="10" />
-            <polyline points="9,30 14,36 19,30" />
-            <line x1="14" y1="24" x2="14" y2="30" />
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+            <polyline points="15 3 21 3 21 9" />
+            <line x1="10" y1="14" x2="21" y2="3" />
           </svg>
-          <p className="text-white text-[15px] font-black tracking-wide">Live-Vorschau</p>
+          <p className="text-white text-[15px] font-black tracking-wide">Live ansehen</p>
           <p className="text-white/55 text-[11px] mt-1.5 text-center px-8 leading-relaxed">
-            Hover oder tippe zum Interagieren
+            Hover zum Vorschauen · Klicken zum Öffnen
           </p>
         </motion.div>
+
+        {/* Clickable link overlay (only visible on hover) */}
+        <motion.a
+          href={p.src}
+          target="_blank"
+          rel="noopener noreferrer"
+          animate={{ opacity: hovered ? 1 : 0 }}
+          transition={{ duration: 0.3 }}
+          className="absolute inset-0 z-10 flex flex-col items-center justify-end pb-10 rounded-[37px]"
+          style={{
+            background: "linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 50%)",
+            pointerEvents: hovered ? "auto" : "none",
+          }}
+        >
+          <span className="flex items-center gap-2 rounded-full bg-white/15 border border-white/20 backdrop-blur-sm px-4 py-2 text-white text-[12px] font-bold tracking-wide">
+            <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+              <polyline points="15 3 21 3 21 9" />
+              <line x1="10" y1="14" x2="21" y2="3" />
+            </svg>
+            {p.domain}
+          </span>
+        </motion.a>
 
         {/* Bottom home indicator */}
         <div className="absolute bottom-2 inset-x-0 z-20 flex justify-center pointer-events-none">

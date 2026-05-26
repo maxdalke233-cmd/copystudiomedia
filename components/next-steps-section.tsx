@@ -16,7 +16,7 @@ function WaveformBars({ active }: { active: boolean }) {
       {[0, 1, 2, 3, 4].map((i) => (
         <span
           key={i}
-          className="w-[2px] rounded-full bg-[#e85d44]"
+          className="w-[2px] rounded-full bg-[#2255EE]"
           style={{
             height: active ? undefined : "3px",
             animation: active
@@ -52,8 +52,8 @@ function VideoCallWidget() {
           to   { height: 9px; }
         }
         @keyframes recPulse {
-          0%, 100% { box-shadow: 0 0 0 0 rgba(232,93,68,0.5); }
-          50%       { box-shadow: 0 0 0 5px rgba(232,93,68,0); }
+          0%, 100% { box-shadow: 0 0 0 0 rgba(0,65,251,0.5); }
+          50%       { box-shadow: 0 0 0 5px rgba(0,65,251,0); }
         }
       `}</style>
 
@@ -69,22 +69,22 @@ function VideoCallWidget() {
                   key={tile}
                   className="flex-1 rounded-lg flex flex-col items-center justify-center gap-1.5 transition-all duration-300"
                   style={{
-                    background: isActive ? "rgba(232,93,68,0.08)" : "#f0ebe7",
-                    border: isActive ? "1.5px solid rgba(232,93,68,0.55)" : "1.5px solid transparent",
-                    boxShadow: isActive ? "0 0 10px rgba(232,93,68,0.15)" : "none",
+                    background: isActive ? "rgba(0,65,251,0.08)" : "#f0ebe7",
+                    border: isActive ? "1.5px solid rgba(0,65,251,0.55)" : "1.5px solid transparent",
+                    boxShadow: isActive ? "0 0 10px rgba(0,65,251,0.15)" : "none",
                   }}
                 >
                   <div
                     className="h-5 w-5 rounded-full transition-all duration-300"
                     style={{
-                      background: isActive ? "rgba(232,93,68,0.75)" : "rgba(0,0,0,0.15)",
-                      boxShadow: isActive ? "0 0 0 3px rgba(232,93,68,0.2)" : "none",
+                      background: isActive ? "rgba(0,65,251,0.75)" : "rgba(0,0,0,0.15)",
+                      boxShadow: isActive ? "0 0 0 3px rgba(0,65,251,0.2)" : "none",
                     }}
                   />
                   <WaveformBars active={isActive} />
                   <span
                     className="text-[7px] font-bold tracking-widest transition-colors duration-300"
-                    style={{ color: isActive ? "#e85d44" : "rgba(0,0,0,0.35)" }}
+                    style={{ color: isActive ? "#2255EE" : "rgba(0,0,0,0.35)" }}
                   >
                     {tile}
                   </span>
@@ -101,7 +101,7 @@ function VideoCallWidget() {
               ))}
             </div>
             <div
-              className="h-3.5 w-3.5 rounded-full bg-[#e85d44]"
+              className="h-3.5 w-3.5 rounded-full bg-[#2255EE]"
               style={{ animation: "recPulse 1.4s ease-in-out infinite" }}
             />
             <span className="text-[7px] font-semibold text-black/30 tracking-[0.08em]">
@@ -122,7 +122,7 @@ function FormWidget() {
       <style>{`
         @keyframes cs-dot-pulse {
           0%, 24%   { background: rgba(0,0,0,0.12); transform: scale(1); box-shadow: none; }
-          30%        { background: rgba(232,75,26,0.85); transform: scale(1.1); box-shadow: 0 0 0 4px rgba(232,75,26,0.12); }
+          30%        { background: rgba(0,65,251,0.85); transform: scale(1.1); box-shadow: 0 0 0 4px rgba(0,65,251,0.12); }
           40%, 100% { background: rgba(0,0,0,0.12); transform: scale(1); box-shadow: none; }
         }
         @keyframes cs-fill-grow {
@@ -170,7 +170,7 @@ function FormWidget() {
             <div style={{
               position: "absolute", top: -4,
               width: 1.5, height: "calc(100% + 8px)",
-              background: "#e85d44", borderRadius: 1,
+              background: "#2255EE", borderRadius: 1,
               animation: "cs-caret-move 4.4s cubic-bezier(.5,.1,.5,1) infinite",
             }} />
           </div>
@@ -178,16 +178,16 @@ function FormWidget() {
           <div className="mt-auto flex items-center gap-2">
             <div style={{
               height: 20, padding: "0 10px", borderRadius: 5,
-              background: "#e85d44",
+              background: "#2255EE",
               display: "flex", alignItems: "center",
-              boxShadow: "0 2px 8px rgba(232,93,68,0.35)",
+              boxShadow: "0 2px 8px rgba(0,65,251,0.35)",
               transformOrigin: "left center",
               animation: "cs-pill-appear 4.4s cubic-bezier(.5,.1,.5,1) infinite",
               opacity: 0,
             }}>
               <span style={{ fontSize: 7, fontWeight: 700, color: "white", letterSpacing: "0.12em", fontFamily: "monospace" }}>TERMIN</span>
             </div>
-            <svg width="16" height="16" fill="none" stroke="#e85d44" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+            <svg width="16" height="16" fill="none" stroke="#2255EE" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
               <path d="m4.5 12.75 6 6 9-13.5" style={{
                 strokeDasharray: 28, strokeDashoffset: 28,
                 animation: "cs-check-draw 4.4s ease-out infinite",
@@ -244,14 +244,14 @@ function AgreementWidget() {
           {/* Track */}
           <div style={{
             height: 28, borderRadius: 7, flexShrink: 0,
-            background: "rgba(232,75,26,0.08)",
+            background: "rgba(0,65,251,0.08)",
             position: "relative", overflow: "hidden",
           }}>
             {/* Fill */}
             <div style={{
               position: "absolute", inset: 0, borderRadius: 7,
-              background: "#e85d44",
-              boxShadow: "0 2px 12px rgba(232,93,68,0.4), inset 0 1px 0 rgba(255,255,255,0.15)",
+              background: "#2255EE",
+              boxShadow: "0 2px 12px rgba(0,65,251,0.4), inset 0 1px 0 rgba(255,255,255,0.15)",
               display: "flex", alignItems: "center", justifyContent: "center",
               animation: "ag-fill-grow 4.6s cubic-bezier(.5,.1,.5,1) infinite",
               width: "0%",
@@ -268,8 +268,8 @@ function AgreementWidget() {
           <div style={{ display: "flex", justifyContent: "center", marginTop: 1 }}>
             <div style={{
               width: 24, height: 24, borderRadius: "50%",
-              background: "#e85d44",
-              boxShadow: "0 6px 16px rgba(232,75,26,0.35)",
+              background: "#2255EE",
+              boxShadow: "0 6px 16px rgba(0,65,251,0.35)",
               display: "flex", alignItems: "center", justifyContent: "center",
               animation: "ag-check-pop 4.6s cubic-bezier(.6,0,.3,1) infinite",
               transform: "scale(0)", opacity: 0,
@@ -340,7 +340,7 @@ export default function NextStepsSection() {
       <div className="mx-auto max-w-[1100px] px-6 md:px-10 lg:px-16">
 
         <div className="flex justify-center mb-7">
-          <span className="inline-flex items-center rounded-full border border-[#ff5000]/40 bg-[#ff5000]/08 px-4 py-1.5 text-[10px] font-bold tracking-[0.14em] uppercase text-[#ff5000]">
+          <span className="inline-flex items-center rounded-full border border-[#0041FB]/40 bg-[#0041FB]/08 px-4 py-1.5 text-[10px] font-bold tracking-[0.14em] uppercase text-[#0041FB]">
             So läuft es ab
           </span>
         </div>
@@ -356,7 +356,7 @@ export default function NextStepsSection() {
               className="rounded-2xl bg-white border border-black/[0.07] p-7 flex flex-col gap-5"
             >
               <div className="flex items-center gap-3">
-                <span className="font-heading text-[36px] font-black leading-none text-[#e85d44] tracking-[-0.02em] shrink-0">
+                <span className="font-heading text-[36px] font-black leading-none text-[#2255EE] tracking-[-0.02em] shrink-0">
                   {step.number}
                 </span>
                 <div className="flex-1 h-px bg-black/[0.07]" />
@@ -377,8 +377,8 @@ export default function NextStepsSection() {
             href="https://calendly.com/maxdalke233/30min"
             target="_blank"
             rel="noopener noreferrer"
-            className="orange-button rounded-xl px-10 py-4 text-[12px] font-extrabold tracking-[0.08em] uppercase text-white hover:scale-[1.02] transition-all duration-200 inline-block"
-            style={{ boxShadow: "0 8px 40px rgba(232,93,68,0.45), 0 2px 12px rgba(232,93,68,0.30)" }}
+            className="blue-button rounded-xl px-10 py-4 text-[12px] font-extrabold tracking-[0.08em] uppercase text-white hover:scale-[1.02] transition-all duration-200 inline-block"
+            style={{ boxShadow: "0 8px 40px rgba(0,65,251,0.45), 0 2px 12px rgba(0,65,251,0.30)" }}
           >
             Jetzt kostenloses Erstgespräch sichern
           </a>

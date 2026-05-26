@@ -17,13 +17,13 @@ const config: Config = {
       },
       colors: {
         fluxora: {
-          orange: "#ff5000",
-          "orange-dark": "#cc3d00",
-          "orange-soft": "rgba(255, 80, 0, 0.14)",
+          blue: "#0041FB",
+          "blue-dark": "#0034C8",
+          "blue-soft": "rgba(0, 65, 251, 0.14)",
           black: "#090909",
           surface: "#111111",
           "surface-2": "#181818",
-          "red-card": "#b03010",
+          "blue-card": "#002FA8",
         },
       },
       borderRadius: {
@@ -31,8 +31,8 @@ const config: Config = {
         "5xl": "2.5rem",
       },
       boxShadow: {
-        "orange-glow":
-          "0 0 32px rgba(255, 80, 0, 0.38), 0 0 80px rgba(255, 80, 0, 0.18)",
+        "blue-glow":
+          "0 0 32px rgba(0, 65, 251, 0.38), 0 0 80px rgba(0, 65, 251, 0.18)",
         glass:
           "inset 0 1px 0 rgba(255,255,255,0.07), 0 16px 60px rgba(0,0,0,0.60)",
         "card-dark": "0 4px 24px rgba(0,0,0,0.50)",

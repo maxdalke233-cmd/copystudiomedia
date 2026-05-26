@@ -79,7 +79,7 @@ export default function FaqSection() {
           <motion.div className="lg:sticky lg:self-start" style={{ top: stickyTop }}>
             {/* Glass pill label */}
             <div className="mb-6 flex justify-center lg:justify-start">
-              <span className="inline-flex items-center gap-2 rounded-full border border-[#ff5000]/50 bg-[#ff5000]/10 backdrop-blur-md px-5 py-2 text-[13px] font-bold tracking-[0.10em] uppercase text-[#ff5000] shadow-[0_4px_20px_rgba(255,80,0,0.25)]">
+              <span className="inline-flex items-center gap-2 rounded-full border border-[#0041FB]/50 bg-[#0041FB]/10 backdrop-blur-md px-5 py-2 text-[13px] font-bold tracking-[0.10em] uppercase text-[#0041FB] shadow-[0_4px_20px_rgba(0,65,251,0.25)]">
                 Häufige Fragen
               </span>
             </div>
@@ -94,7 +94,7 @@ export default function FaqSection() {
                 href="https://calendly.com/maxdalke233/30min"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="orange-button rounded-full px-6 py-3 text-[13px] font-extrabold text-white hover:scale-[1.02] transition-all duration-200 inline-block"
+                className="blue-button rounded-full px-6 py-3 text-[13px] font-extrabold text-white hover:scale-[1.02] transition-all duration-200 inline-block"
               >
                 Erstgespräch sichern →
               </a>
@@ -108,8 +108,8 @@ export default function FaqSection() {
                 key={i}
                 className="rounded-2xl overflow-hidden bg-white/[0.04] transition-all duration-300"
                 style={open === i ? {
-                  border: "1px solid rgba(255,80,0,0.55)",
-                  boxShadow: "0 0 40px rgba(255,80,0,0.18), 0 4px 24px rgba(255,80,0,0.12)",
+                  border: "1px solid rgba(0,65,251,0.55)",
+                  boxShadow: "0 0 40px rgba(0,65,251,0.18), 0 4px 24px rgba(0,65,251,0.12)",
                 } : {
                   border: "1px solid rgba(255,255,255,0.08)",
                 }}
@@ -121,7 +121,7 @@ export default function FaqSection() {
                   <span className="text-[15px] md:text-[16px] font-semibold text-white/80 group-hover:text-white transition-colors duration-200 leading-snug">
                     {faq.q}
                   </span>
-                  <span className="shrink-0 h-6 w-6 rounded-full border border-white/20 flex items-center justify-center text-white/40 group-hover:border-[#ff5000]/60 group-hover:text-[#ff5000] transition-all duration-200">
+                  <span className="shrink-0 h-6 w-6 rounded-full border border-white/20 flex items-center justify-center text-white/40 group-hover:border-[#0041FB]/60 group-hover:text-[#0041FB] transition-all duration-200">
                     {open === i ? <Minus className="h-3 w-3" /> : <Plus className="h-3 w-3" />}
                   </span>
                 </button>

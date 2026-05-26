@@ -4,7 +4,7 @@ export default function FactCard() {
   return (
     <div className="rounded-2xl overflow-hidden relative min-h-[200px]">
       {/* Background editorial photo */}
-      <div className="absolute inset-0 bg-gradient-to-br from-orange-900 to-red-950">
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-900 to-blue-950">
         <Image
           src="https://picsum.photos/seed/factcardbg/300/220"
           alt=""
@@ -14,7 +14,7 @@ export default function FactCard() {
         />
       </div>
       {/* Orange-red overlay */}
-      <div className="absolute inset-0 bg-[#b03010]/72" />
+      <div className="absolute inset-0 bg-[#002FA8]/72" />
 
       {/* Content */}
       <div className="relative z-10 p-5 flex flex-col justify-between min-h-[200px]">

@@ -94,7 +94,7 @@ function Avatar({ src, initials, logoMode }: { src?: string; initials?: string; 
   return (
     <div
       className="h-11 w-11 rounded-full flex-shrink-0 flex items-center justify-center ring-2 ring-black/10"
-      style={{ background: "linear-gradient(135deg, #ff5000 0%, #c94432 100%)" }}
+      style={{ background: "linear-gradient(135deg, #0041FB 0%, #0034C8 100%)" }}
     >
       <span className="font-heading font-black text-[13px] text-white tracking-tight">
         {initials ?? "?"}

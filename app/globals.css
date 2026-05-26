@@ -11,7 +11,7 @@
 }
 
 ::selection {
-  background: #ff5000;
+  background: #0041FB;
   color: #ffffff;
 }
 
@@ -33,7 +33,7 @@
   --card: 0 0% 7%;
   --card-foreground: 0 0% 100%;
 
-  --primary: 18 100% 50%;
+  --primary: 228 97% 49%;
   --primary-foreground: 0 0% 100%;
 
   --secondary: 0 0% 11%;
@@ -42,30 +42,30 @@
   --muted: 0 0% 15%;
   --muted-foreground: 0 0% 58%;
 
-  --accent: 18 100% 50%;
+  --accent: 228 97% 49%;
   --accent-foreground: 0 0% 100%;
 
   --border: 0 0% 100% / 0.09;
   --input: 0 0% 100% / 0.09;
-  --ring: 18 100% 50%;
+  --ring: 228 97% 49%;
 
   --radius: 1rem;
 
   /* Fluxora brand tokens */
-  --fluxora-orange: #ff5000;
-  --fluxora-orange-dark: #cc3d00;
-  --fluxora-orange-glow: rgba(255, 80, 0, 0.35);
-  --fluxora-orange-soft: rgba(255, 80, 0, 0.14);
+  --fluxora-blue: #0041FB;
+  --fluxora-blue-dark: #0034C8;
+  --fluxora-blue-glow: rgba(0, 65, 251, 0.35);
+  --fluxora-blue-soft: rgba(0, 65, 251, 0.14);
   --fluxora-black: #090909;
   --fluxora-surface: #111111;
   --fluxora-surface-2: #181818;
-  --fluxora-red-card: #b03010;
+  --fluxora-blue-card: #002FA8;
   --glass-bg: rgba(16, 16, 16, 0.72);
   --glass-border: rgba(255, 255, 255, 0.09);
 }
 
 html {
-  background-color: #ff5000;
+  background-color: #0041FB;
 }
 
 body {
@@ -106,10 +106,10 @@ body {
     border-radius: 9999px;
   }
 
-  .orange-button {
-    background: linear-gradient(180deg, #e85d44 0%, #c94432 100%);
+  .blue-button {
+    background: linear-gradient(180deg, #2255EE 0%, #0034C8 100%);
     box-shadow:
-      0 0 24px rgba(232, 93, 68, 0.45),
+      0 0 24px rgba(0, 65, 251, 0.45),
       inset 0 1px 0 rgba(255, 255, 255, 0.15);
     font-family: "HelveticaNowDisplay", sans-serif;
     font-weight: 800;
@@ -138,16 +138,16 @@ body {
     pointer-events: none;
   }
 
-  .orange-glow-blob {
+  .blue-glow-blob {
     background: radial-gradient(
       50% 50% at 50% 50%,
-      rgba(255, 80, 0, 0.4) 0%,
-      rgba(255, 80, 0, 0) 100%
+      rgba(0, 65, 251, 0.4) 0%,
+      rgba(0, 65, 251, 0) 100%
     );
     filter: blur(50px);
   }
 
-  .orange-dot-label {
+  .blue-dot-label {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -155,9 +155,9 @@ body {
     color: rgba(255, 255, 255, 0.5);
     letter-spacing: 0.04em;
   }
-  .orange-dot-label::before {
+  .blue-dot-label::before {
     content: "•";
-    color: #ff5000;
+    color: #0041FB;
     font-size: 14px;
   }
 

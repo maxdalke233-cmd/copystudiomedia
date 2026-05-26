@@ -76,7 +76,7 @@ export default function Navbar() {
         >
           {/* Scroll progress bar */}
           <motion.div
-            className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#ff5000] origin-left"
+            className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#0041FB] origin-left"
             style={{ scaleX }}
           />
 
@@ -84,7 +84,7 @@ export default function Navbar() {
           <motion.div
             className="absolute inset-0 pointer-events-none z-0"
             style={{
-              background: "linear-gradient(90deg, transparent 0%, rgba(255,110,20,0.18) 30%, rgba(255,255,255,0.38) 50%, rgba(255,110,20,0.18) 70%, transparent 100%)",
+              background: "linear-gradient(90deg, transparent 0%, rgba(0,65,251,0.18) 30%, rgba(255,255,255,0.38) 50%, rgba(0,65,251,0.18) 70%, transparent 100%)",
               mixBlendMode: "screen",
             }}
             initial={{ x: "-100%" }}
@@ -106,12 +106,12 @@ export default function Navbar() {
               rel="noopener noreferrer"
               aria-label="WhatsApp"
               className="flex items-center justify-center h-9 w-9 rounded-full shrink-0 relative"
-              style={{ background: "#25D366" }}
+              style={{ background: "#0041FB" }}
               animate={{
                 boxShadow: [
-                  "0 0 0px 0px rgba(37,211,102,0)",
-                  "0 0 14px 5px rgba(37,211,102,0.7)",
-                  "0 0 0px 0px rgba(37,211,102,0)",
+                  "0 0 0px 0px rgba(0,65,251,0)",
+                  "0 0 14px 5px rgba(0,65,251,0.7)",
+                  "0 0 0px 0px rgba(0,65,251,0)",
                 ],
               }}
               transition={{ duration: 1.8, repeat: Infinity, repeatDelay: 4, ease: "easeInOut" }}
@@ -180,7 +180,7 @@ export default function Navbar() {
                         >
                           {link.label}
                           {activeSection === link.id && (
-                            <div className="h-1.5 w-1.5 rounded-full bg-[#ff5000]" />
+                            <div className="h-1.5 w-1.5 rounded-full bg-[#0041FB]" />
                           )}
                         </motion.button>
                       );
@@ -195,7 +195,7 @@ export default function Navbar() {
                   href="https://calendly.com/maxdalke233/30min"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full orange-button rounded-xl py-3.5 text-[13px] font-extrabold tracking-[0.06em] uppercase text-white flex items-center justify-center gap-2"
+                  className="w-full blue-button rounded-xl py-3.5 text-[13px] font-extrabold tracking-[0.06em] uppercase text-white flex items-center justify-center gap-2"
                   onClick={() => setMobileOpen(false)}
                 >
                   Erstgespräch sichern

@@ -46,7 +46,7 @@ function PhoneCard({ p, i, isMobile }: { p: Project; i: number; isMobile: boolea
   const yOffset = isMobile ? 0 : i === 0 ? 40 : -40;
   const glowShadow =
     i === 1
-      ? "0 44px 100px rgba(0,0,0,0.30), 0 8px 24px rgba(0,0,0,0.16), 0 0 70px rgba(255,80,0,0.14)"
+      ? "0 44px 100px rgba(0,0,0,0.30), 0 8px 24px rgba(0,0,0,0.16), 0 0 70px rgba(0,65,251,0.14)"
       : "0 44px 100px rgba(0,0,0,0.30), 0 8px 24px rgba(0,0,0,0.16)";
 
   return (
@@ -176,7 +176,7 @@ export default function PortfolioSection() {
 
         {/* Label */}
         <motion.div {...fadeUp(0)} className="flex justify-center mb-8">
-          <span className="inline-flex items-center rounded-full border border-[#ff5000]/40 bg-[#ff5000]/10 px-4 py-1.5 text-[11px] font-bold tracking-[0.14em] uppercase text-[#ff5c35]">
+          <span className="inline-flex items-center rounded-full border border-[#0041FB]/40 bg-[#0041FB]/10 px-4 py-1.5 text-[11px] font-bold tracking-[0.14em] uppercase text-[#3366FF]">
             Portfolio
           </span>
         </motion.div>
@@ -222,24 +222,24 @@ export default function PortfolioSection() {
 
         {/* CTA block */}
         <motion.div {...fadeUp(0.35)} className="mt-16 max-w-[680px] mx-auto">
-          <div className="h-px w-full bg-[#e85d44]/40" />
+          <div className="h-px w-full bg-[#2255EE]/40" />
           <p className="text-center text-[15px] md:text-[16px] leading-[1.75] text-black/70 py-8 px-4">
             Deine Kunden googeln dich – bevor sie anrufen.{" "}
-            <span className="font-semibold text-[#e85d44] underline decoration-[#e85d44]/60 underline-offset-2">Was finden sie?</span>
+            <span className="font-semibold text-[#2255EE] underline decoration-[#2255EE]/60 underline-offset-2">Was finden sie?</span>
             {" "}
-            <span className="font-semibold text-[#e85d44] underline decoration-[#e85d44]/60 underline-offset-2">Meistens nichts.</span>
+            <span className="font-semibold text-[#2255EE] underline decoration-[#2255EE]/60 underline-offset-2">Meistens nichts.</span>
             {" "}Oder eine Website, die aussieht als wäre sie 2003 gebaut worden – mit Schriftarten aus Word und einem Kontaktformular das niemand ausfüllt.
           </p>
-          <div className="h-px w-full bg-[#e85d44]/40" />
+          <div className="h-px w-full bg-[#2255EE]/40" />
           <div className="flex justify-center mt-8">
             <a
               href="https://calendly.com/maxdalke233/30min"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative overflow-hidden rounded-xl px-10 py-4 text-[13px] font-extrabold font-heading tracking-[0.12em] uppercase text-white transition-all duration-300 hover:scale-[1.04] hover:shadow-[0_0_40px_rgba(232,93,68,0.6),0_0_80px_rgba(232,93,68,0.25)] active:scale-[0.97] inline-block"
+              className="group relative overflow-hidden rounded-xl px-10 py-4 text-[13px] font-extrabold font-heading tracking-[0.12em] uppercase text-white transition-all duration-300 hover:scale-[1.04] hover:shadow-[0_0_40px_rgba(0,65,251,0.6),0_0_80px_rgba(0,65,251,0.25)] active:scale-[0.97] inline-block"
               style={{
-                background: "linear-gradient(180deg, #e85d44 0%, #c94432 100%)",
-                boxShadow: "0 0 24px rgba(232, 93, 68, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.15)",
+                background: "linear-gradient(180deg, #2255EE 0%, #0034C8 100%)",
+                boxShadow: "0 0 24px rgba(0, 65, 251, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.15)",
               }}
             >
               <span className="pointer-events-none absolute inset-0 -translate-x-full skew-x-[-20deg] bg-white/20 transition-transform duration-500 group-hover:translate-x-[200%]" />

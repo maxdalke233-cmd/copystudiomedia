@@ -7,9 +7,9 @@ export default function TeamSection() {
   return (
     <section className="relative bg-black py-16 md:py-28 overflow-hidden border-t border-white/[0.06]">
       {/* Orange glow — top right */}
-      <div className="orange-glow-blob pointer-events-none absolute top-[-100px] right-[-100px] h-[560px] w-[560px] opacity-[0.22]" />
+      <div className="blue-glow-blob pointer-events-none absolute top-[-100px] right-[-100px] h-[560px] w-[560px] opacity-[0.22]" />
       {/* Orange glow — bottom left */}
-      <div className="orange-glow-blob pointer-events-none absolute bottom-[-100px] left-[-100px] h-[560px] w-[560px] opacity-[0.22]" />
+      <div className="blue-glow-blob pointer-events-none absolute bottom-[-100px] left-[-100px] h-[560px] w-[560px] opacity-[0.22]" />
 
       <div className="relative mx-auto max-w-[1280px] px-6 md:px-10 lg:px-16">
 

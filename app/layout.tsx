@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Nunito, Bricolage_Grotesque, Inter, Instrument_Serif } from "next/font/google";
 import "./globals.css";
+import TabTitleHook from "@/components/tab-title-hook";
 
 const nunito = Nunito({
   subsets: ["latin", "latin-ext"],
@@ -33,9 +34,9 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "Fluxora — Technology Crafted for All, Not Machines",
+  title: "CopyStudio Web",
   description:
-    "We create clear, intuitive, and accessible digital experiences shaped by real human behavior.",
+    "CopyStudio Web — deine Agentur für digitale Erlebnisse.",
 };
 
 export default function RootLayout({
@@ -50,6 +51,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="font-body bg-[#090909] text-white antialiased" suppressHydrationWarning>
+        <TabTitleHook />
         {children}
       </body>
     </html>

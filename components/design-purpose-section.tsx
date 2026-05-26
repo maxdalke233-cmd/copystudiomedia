@@ -13,7 +13,7 @@ export default function DesignPurposeSection() {
         <motion.div {...fadeUp(0)} className="text-center">
           <h2
             className="font-heading text-[44px] md:text-[58px] font-black leading-[1.06] tracking-[-0.035em]"
-            style={{ textShadow: "0 0 60px rgba(255,80,0,0.55), 0 0 120px rgba(255,80,0,0.25)" }}
+            style={{ textShadow: "0 0 60px rgba(0,65,251,0.55), 0 0 120px rgba(0,65,251,0.25)" }}
           >
             <span className="text-white">Design With Purpose.</span>
             <br />
@@ -39,7 +39,7 @@ export default function DesignPurposeSection() {
               className="object-cover opacity-60 mix-blend-luminosity"
               sizes="(max-width: 768px) 100vw, 33vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-orange-950/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-blue-950/40 to-transparent" />
           </motion.div>
 
           {/* Card 2 — Projects Delivered */}
@@ -47,7 +47,7 @@ export default function DesignPurposeSection() {
             {...fadeUp(0.2)}
             className="glass-card fine-dark-border rounded-2xl p-6"
           >
-            <FluxoraIcon className="h-8 w-8 text-[#ff5000] mb-4" />
+            <FluxoraIcon className="h-8 w-8 text-[#0041FB] mb-4" />
             <div className="font-heading text-[28px] font-black text-white">
               150+
             </div>

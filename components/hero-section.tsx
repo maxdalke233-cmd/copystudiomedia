@@ -97,7 +97,7 @@ function PhoneFrame({ src, shimmerDelay = "0s" }: { src: string; shimmerDelay?: 
       <div style={{
         position: "absolute", inset: 0,
         borderRadius: "38px", padding: "6px",
-        background: "linear-gradient(to top, transparent 0%, transparent 36%, rgba(232,85,45,0.45) 44%, rgba(255,175,130,0.98) 50%, rgba(232,85,45,0.45) 56%, transparent 64%, transparent 100%)",
+        background: "linear-gradient(to top, transparent 0%, transparent 36%, rgba(0,65,251,0.45) 44%, rgba(150,190,255,0.98) 50%, rgba(0,65,251,0.45) 56%, transparent 64%, transparent 100%)",
         backgroundSize: "100% 300%",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "0 0%",
@@ -135,7 +135,7 @@ export default function HeroSection() {
       className="relative min-h-[680px] md:min-h-[760px] overflow-hidden pt-[60px]"
       style={{
         isolation: "isolate",
-        background: "radial-gradient(80% 60% at 50% 35%, #2a1e15 0%, #15110d 55%, #0a0806 100%)",
+        background: "radial-gradient(80% 60% at 50% 35%, #0d1840 0%, #060e22 55%, #04080e 100%)",
       }}
     >
       <style>{`
@@ -169,7 +169,7 @@ export default function HeroSection() {
       <div className="hero-glow-a pointer-events-none absolute rounded-full" style={{
         top: "-12%", left: "-22%", width: "78%", height: "68%", zIndex: 0,
         filter: "blur(48px)",
-        background: "radial-gradient(closest-side, rgba(255,110,40,0.85) 0%, rgba(232,75,26,0.55) 35%, transparent 75%)",
+        background: "radial-gradient(closest-side, rgba(0,65,251,0.85) 0%, rgba(0,65,251,0.55) 35%, transparent 75%)",
         animation: "heroGlowA 6s ease-in-out infinite",
       }} />
 
@@ -177,7 +177,7 @@ export default function HeroSection() {
       <div className="hero-glow-b pointer-events-none absolute rounded-full" style={{
         bottom: "-16%", right: "-22%", width: "88%", height: "66%", zIndex: 0,
         filter: "blur(48px)",
-        background: "radial-gradient(closest-side, rgba(255,160,80,0.70) 0%, rgba(232,90,30,0.45) 40%, transparent 75%)",
+        background: "radial-gradient(closest-side, rgba(80,140,255,0.70) 0%, rgba(232,90,30,0.45) 40%, transparent 75%)",
         animation: "heroGlowB 8s ease-in-out infinite",
         animationDelay: "-2.5s",
       }} />
@@ -217,17 +217,17 @@ export default function HeroSection() {
       {/* Left gradient — text area dark, right fully transparent */}
       <div style={{
         position: "absolute", inset: 0, zIndex: 2, pointerEvents: "none",
-        background: "linear-gradient(to right, rgba(10,8,6,1) 32%, rgba(10,8,6,0.85) 48%, rgba(10,8,6,0.2) 68%, rgba(10,8,6,0) 80%)",
+        background: "linear-gradient(to right, rgba(4,8,14,1) 32%, rgba(4,8,14,0.85) 48%, rgba(4,8,14,0.2) 68%, rgba(4,8,14,0) 80%)",
       }} />
       {/* Subtle top fade */}
       <div style={{
         position: "absolute", inset: 0, zIndex: 2, pointerEvents: "none",
-        background: "linear-gradient(to bottom, rgba(10,8,6,0.5) 0%, transparent 18%)",
+        background: "linear-gradient(to bottom, rgba(4,8,14,0.5) 0%, transparent 18%)",
       }} />
       {/* Bottom fade */}
       <div style={{
         position: "absolute", insetInline: 0, bottom: 0, height: "7rem", zIndex: 2, pointerEvents: "none",
-        background: "linear-gradient(to bottom, transparent, #0a0806)",
+        background: "linear-gradient(to bottom, transparent, #04080e)",
       }} />
       {/* Noise */}
       <div className="noise-overlay" style={{ zIndex: 2 }} />
@@ -266,7 +266,7 @@ export default function HeroSection() {
               href="https://calendly.com/maxdalke233/30min"
               target="_blank"
               rel="noopener noreferrer"
-              className="orange-button rounded-full px-5 py-2.5 text-[13px] font-extrabold text-white flex items-center gap-2 hover:scale-[1.025] hover:shadow-orange-glow transition-all duration-300"
+              className="blue-button rounded-full px-5 py-2.5 text-[13px] font-extrabold text-white flex items-center gap-2 hover:scale-[1.025] hover:shadow-blue-glow transition-all duration-300"
             >
               <TypewriterLabel />
               <ArrowRight className="h-4 w-4 shrink-0" />

@@ -49,7 +49,7 @@ function SpinBorderCard({
         y: -10,
         scale: 1.02,
         boxShadow: accent
-          ? "0 0 60px rgba(255,80,0,0.35), 0 20px 60px rgba(0,0,0,0.5)"
+          ? "0 0 60px rgba(0,65,251,0.35), 0 20px 60px rgba(0,0,0,0.5)"
           : "0 0 30px rgba(255,255,255,0.07), 0 20px 60px rgba(0,0,0,0.5)",
       } : {
         y: 0,
@@ -74,7 +74,7 @@ function SpinBorderCard({
             top: "-50%",
             left: "-50%",
             background: accent
-              ? "conic-gradient(from 0deg, transparent 0%, transparent 30%, #ff4000 44%, #ff7040 50%, #ff9060 54%, transparent 64%, transparent 100%)"
+              ? "conic-gradient(from 0deg, transparent 0%, transparent 30%, #0041FB 44%, #4477FF 50%, #6699FF 54%, transparent 64%, transparent 100%)"
               : "conic-gradient(from 0deg, transparent 0%, transparent 40%, rgba(255,255,255,0.14) 50%, rgba(255,255,255,0.07) 57%, transparent 65%, transparent 100%)",
           }}
           animate={{ rotate: [0, 360] }}
@@ -97,7 +97,7 @@ export default function VergleichSection() {
 
         {/* Label */}
         <div className="flex justify-center mb-8">
-          <span className="inline-flex items-center gap-2 rounded-full border border-[#ff5000]/50 bg-[#ff5000]/10 px-4 py-1.5 text-[11px] font-bold tracking-[0.12em] uppercase text-[#ff5000]">
+          <span className="inline-flex items-center gap-2 rounded-full border border-[#0041FB]/50 bg-[#0041FB]/10 px-4 py-1.5 text-[11px] font-bold tracking-[0.12em] uppercase text-[#0041FB]">
             MIT UNS VS. DISCOUNTER WEBSITEN
           </span>
         </div>
@@ -117,9 +117,9 @@ export default function VergleichSection() {
                       animate={{
                         textShadow: [
                           "0 0 0px rgba(0,0,0,0)",
-                          "0 0 6px rgba(255,100,0,0.35)",
-                          "0 0 18px rgba(255,100,0,1), 0 0 40px rgba(255,70,0,0.55)",
-                          "0 0 6px rgba(255,100,0,0.35)",
+                          "0 0 6px rgba(0,65,251,0.35)",
+                          "0 0 18px rgba(0,65,251,1), 0 0 40px rgba(255,70,0,0.55)",
+                          "0 0 6px rgba(0,65,251,0.35)",
                           "0 0 0px rgba(0,0,0,0)",
                         ],
                       }}
@@ -172,15 +172,15 @@ export default function VergleichSection() {
             <div className="p-8">
               <div className="mb-6 flex justify-start overflow-hidden" style={{ height: 52 }}>
                 <img
-                  src="/images/logo-copystudio.png"
-                  alt="CopyStudio Web"
+                  src="/images/logo-dalke.png"
+                  alt="Dalke Web"
                   style={{ height: 130, width: "auto", marginTop: -38, marginBottom: -40, display: "block" }}
                 />
               </div>
               <ul className="space-y-4">
                 {copystudioItems.map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <span className="mt-[2px] text-[#ff5000] text-[16px] font-bold shrink-0">✓</span>
+                    <span className="mt-[2px] text-[#0041FB] text-[16px] font-bold shrink-0">✓</span>
                     <span className="text-[14px] leading-[1.6] text-white/80 font-medium">{item}</span>
                   </li>
                 ))}
@@ -196,8 +196,8 @@ export default function VergleichSection() {
             href="https://calendly.com/maxdalke233/30min"
             target="_blank"
             rel="noopener noreferrer"
-            className="orange-button rounded-full px-16 py-5 text-[15px] font-extrabold tracking-[0.04em] uppercase text-white hover:scale-[1.03] transition-all duration-200 inline-block"
-            style={{ boxShadow: "0 12px 50px rgba(255,80,0,0.5), 0 3px 16px rgba(255,80,0,0.3)" }}
+            className="blue-button rounded-full px-16 py-5 text-[15px] font-extrabold tracking-[0.04em] uppercase text-white hover:scale-[1.03] transition-all duration-200 inline-block"
+            style={{ boxShadow: "0 12px 50px rgba(0,65,251,0.5), 0 3px 16px rgba(0,65,251,0.3)" }}
           >
             Jetzt kostenloses Erstgespräch sichern
           </a>

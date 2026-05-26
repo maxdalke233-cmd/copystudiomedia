@@ -54,7 +54,7 @@ export default function StatCard({ value, label }: StatCardProps) {
         {/* Orange underline */}
         <motion.span
           className="absolute -bottom-1 left-0 w-full h-[2.5px] rounded-full"
-          style={{ background: "linear-gradient(90deg, #ff5000, #ff8040)", originX: 0 }}
+          style={{ background: "linear-gradient(90deg, #0041FB, #5588FF)", originX: 0 }}
           initial={{ scaleX: 0 }}
           animate={done ? { scaleX: 1 } : { scaleX: 0 }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}

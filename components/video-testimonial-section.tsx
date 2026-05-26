@@ -31,7 +31,7 @@ export default function VideoTestimonialSection() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="mb-8 flex justify-center"
         >
-          <span className="inline-flex items-center gap-2 rounded-full border border-[#ff5000]/30 bg-[#ff5000]/[0.07] px-4 py-1.5 text-[11px] font-bold tracking-[0.14em] uppercase text-[#ff5000]">
+          <span className="inline-flex items-center gap-2 rounded-full border border-[#0041FB]/30 bg-[#0041FB]/[0.07] px-4 py-1.5 text-[11px] font-bold tracking-[0.14em] uppercase text-[#0041FB]">
             Was unsere Kunden sagen
           </span>
         </motion.div>
@@ -96,7 +96,7 @@ export default function VideoTestimonialSection() {
                   transition={{ duration: 0.18 }}
                   className="absolute inset-0 flex items-center justify-center"
                 >
-                  <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#ff5000] shadow-[0_0_40px_rgba(255,80,0,0.45)] transition-transform duration-200 hover:scale-110">
+                  <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#0041FB] shadow-[0_0_40px_rgba(0,65,251,0.45)] transition-transform duration-200 hover:scale-110">
                     <svg viewBox="0 0 24 24" className="h-8 w-8 translate-x-0.5 fill-white">
                       <polygon points="6,4 20,12 6,20" />
                     </svg>
@@ -113,8 +113,8 @@ export default function VideoTestimonialSection() {
               <p className="text-[12px] text-gray-400">Geschäftsführer</p>
             </div>
             <img
-              src="/images/copystudio-web-logo-dark.png"
-              alt="CopyStudio Web"
+              src="/images/logo-dalke.png"
+              alt="Dalke Web"
               style={{ height: 48, width: "auto", objectFit: "contain", flexShrink: 0 }}
             />
           </div>
@@ -149,13 +149,13 @@ export default function VideoTestimonialSection() {
           </div>
 
           {/* Ergebnis */}
-          <div className="border-t-2 border-[#ff5000] pt-5">
-            <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.14em] text-[#ff5000]">
+          <div className="border-t-2 border-[#0041FB] pt-5">
+            <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.14em] text-[#0041FB]">
               Ergebnis
             </p>
             {/* Salmon quote box */}
             <div className="rounded-xl bg-[#ffe8e0] p-5">
-              <p className="text-[11px] font-bold uppercase tracking-widest text-[#ff5000]/70 mb-3">
+              <p className="text-[11px] font-bold uppercase tracking-widest text-[#0041FB]/70 mb-3">
                 Kundenstimme
               </p>
               <p className="text-[14px] leading-[1.75] text-[#3a1a10] italic">
@@ -201,7 +201,7 @@ export default function VideoTestimonialSection() {
             href="https://calendly.com/maxdalke233/30min"
             target="_blank"
             rel="noopener noreferrer"
-            className="orange-button rounded-full px-8 py-4 text-[13px] font-extrabold tracking-[0.12em] uppercase text-white hover:scale-[1.03] transition-all duration-200 shadow-[0_8px_40px_rgba(255,80,0,0.3)] inline-block"
+            className="blue-button rounded-full px-8 py-4 text-[13px] font-extrabold tracking-[0.12em] uppercase text-white hover:scale-[1.03] transition-all duration-200 shadow-[0_8px_40px_rgba(0,65,251,0.3)] inline-block"
           >
             Jetzt kostenloses Erstgespräch sichern
           </a>

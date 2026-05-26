@@ -9,7 +9,7 @@ export default function MeetMindsSection() {
   return (
     <section className="relative bg-black py-24 md:py-32 border-t border-white/[0.06] overflow-hidden">
       {/* Orange blur bubbles */}
-      <div className="absolute top-[8%] left-[-5%] w-[500px] h-[500px] rounded-full bg-[#ff5000]/[0.11] blur-[130px] pointer-events-none" />
+      <div className="absolute top-[8%] left-[-5%] w-[500px] h-[500px] rounded-full bg-[#0041FB]/[0.11] blur-[130px] pointer-events-none" />
       <div className="absolute bottom-[10%] right-[-5%] w-[400px] h-[400px] rounded-full bg-[#ff7000]/[0.08] blur-[110px] pointer-events-none" />
       <div className="absolute top-[45%] left-[30%] w-[300px] h-[300px] rounded-full bg-[#ff4500]/[0.06] blur-[90px] pointer-events-none" />
 
@@ -49,24 +49,24 @@ export default function MeetMindsSection() {
                 Ich komme nicht aus der klassischen Agentur-Welt. Kein Studium, keine Konzern-Karriere. Ich habe früh angefangen, mir Dinge selbst beizubringen – und daraus ein Business gemacht.
               </p>
               <p>
-                Mein Einstieg war Social Media und Content. Ich habe verstanden, wie Aufmerksamkeit funktioniert, was Menschen dazu bringt zu klicken, zu lesen, zu kaufen. Nicht aus der Theorie – sondern weil ich es selbst gemacht habe, für eigene Projekte, mit eigenem Geld.
+                Mein Einstieg war im digitalen Marketing. Ich habe verstanden, wie Aufmerksamkeit funktioniert, was Menschen dazu bringt zu klicken, zu lesen, zu kaufen. Nicht aus der Theorie – sondern weil ich es selbst gemacht habe, für eigene Projekte, mit eigenem Geld.
               </p>
               <p>
-                Dann habe ich eine eigene Brand im Barber-Bereich aufgebaut. Shopify-Store, Branding, Website – alles selbst umgesetzt. Und genau da habe ich gemerkt: Die Website entscheidet, ob ein Kunde kauft oder geht. Nicht das Produkt. Nicht der Preis.{" "}
+                Dann habe ich eine eigene Brand im Barber-Bereich aufgebaut. Branding, Website, Conversion-Optimierung – alles selbst umgesetzt. Und genau da habe ich gemerkt: Die Website entscheidet, ob ein Kunde kauft oder geht. Nicht das Produkt. Nicht der Preis.{" "}
                 <span className="font-semibold text-white/80">Der erste Eindruck.</span>
               </p>
               <p>
-                Seitdem arbeite ich an der Schnittstelle zwischen Design, Technik und Verkaufspsychologie. Ich nutze moderne Tools und{" "}
+                Seitdem baue ich Websites, die verkaufen. An der Schnittstelle zwischen Design, Technik und Verkaufspsychologie. Mit modernen Tools und{" "}
                 <span className="font-semibold text-white/80">AI</span>
-                , um Ergebnisse zu liefern, für die andere ganze Teams brauchen – schneller, präziser und ohne Agentur-Overhead.
+                , um Ergebnisse zu liefern, für die andere ganze Agenturen brauchen – schneller, präziser und ohne Overhead.
               </p>
               <p>
-                Irgendwann war klar: Dieses Wissen gehört nicht in eigene Projekte – lokale Unternehmen verdienen einen digitalen Auftritt, der so professionell ist wie ihre Arbeit. Genau dafür habe ich{" "}
+                Irgendwann war klar: Lokale Unternehmen verdienen einen digitalen Auftritt, der so professionell ist wie ihre Arbeit. Genau dafür habe ich{" "}
                 <span className="font-semibold text-white/80">CopyStudio Web</span>{" "}
                 gegründet.
               </p>
               <p>
-                Keine große Agentur. Kein aufgeblasenes Team. Sondern ein Ansprechpartner, der dein Business versteht – und einen Auftritt baut, der Kunden bringt.
+                Keine große Agentur. Kein aufgeblasenes Team. Sondern ein Ansprechpartner, der dein Business versteht – und eine Website baut, die Kunden bringt.
               </p>
             </div>
 

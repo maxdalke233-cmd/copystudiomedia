@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { fadeUp } from "@/lib/motion";
-import Image from "next/image";
 
 const PHONE_W = 400;
 const PHONE_H = 800;
@@ -43,6 +42,7 @@ function PhoneCard({ p, i, isMobile }: { p: Project; i: number; isMobile: boolea
 
   const pw = isMobile ? MOBILE_W : PHONE_W;
   const ph = isMobile ? MOBILE_H : PHONE_H;
+
   const rotate = isMobile ? 0 : i === 0 ? -5 : 5;
   const yOffset = isMobile ? 0 : i === 0 ? 40 : -40;
   const glowShadow =
@@ -61,7 +61,7 @@ function PhoneCard({ p, i, isMobile }: { p: Project; i: number; isMobile: boolea
     >
       {/* Phone shell */}
       <div
-        className="relative overflow-hidden rounded-[40px] border-[3px] border-black/85 bg-black cursor-pointer"
+        className="relative overflow-hidden rounded-[40px] border-[3px] border-black/85 bg-black"
         style={{
           width: pw,
           height: ph,
@@ -78,26 +78,29 @@ function PhoneCard({ p, i, isMobile }: { p: Project; i: number; isMobile: boolea
           <div className="h-[22px] w-[90px] rounded-full bg-black" />
         </div>
 
-        {/* Screenshot */}
-        <Image
-          src={p.screenshot}
-          alt={p.title}
-          fill
-          sizes={`${PHONE_W}px`}
-          className="object-cover object-top"
-          priority={i === 0}
-        />
+        {/* Screenshot — selbst scrollbar (Mausrad / Trackpad / Touch) */}
+        <div
+          className="absolute inset-0 overflow-y-auto overflow-x-hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          style={{ WebkitOverflowScrolling: "touch" }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={p.screenshot}
+            alt={p.title}
+            draggable={false}
+            className="block w-full h-auto select-none"
+          />
+        </div>
 
         {/* Hover overlay — fades out on hover, links to live site */}
         <motion.div
           animate={{ opacity: hovered ? 0 : 1 }}
           transition={{ duration: 0.3 }}
-          className="absolute inset-0 z-10 flex flex-col items-center justify-center rounded-[37px]"
+          className="absolute inset-0 z-10 flex flex-col items-center justify-center rounded-[37px] pointer-events-none"
           style={{
             backdropFilter: "blur(4px)",
             WebkitBackdropFilter: "blur(4px)",
             background: "rgba(0,0,0,0.38)",
-            pointerEvents: hovered ? "none" : "auto",
           }}
         >
           {/* External link icon */}
@@ -116,32 +119,33 @@ function PhoneCard({ p, i, isMobile }: { p: Project; i: number; isMobile: boolea
           </svg>
           <p className="text-white text-[15px] font-black tracking-wide">Live ansehen</p>
           <p className="text-white/55 text-[11px] mt-1.5 text-center px-8 leading-relaxed">
-            Hover zum Vorschauen · Klicken zum Öffnen
+            Scrolle durch die Seite · unten live öffnen
           </p>
         </motion.div>
 
-        {/* Clickable link overlay (only visible on hover) */}
-        <motion.a
-          href={p.src}
-          target="_blank"
-          rel="noopener noreferrer"
+        {/* Open-live pill — only the pill is clickable, so scrolling stays free */}
+        <motion.div
           animate={{ opacity: hovered ? 1 : 0 }}
           transition={{ duration: 0.3 }}
-          className="absolute inset-0 z-10 flex flex-col items-center justify-end pb-10 rounded-[37px]"
+          className="absolute inset-x-0 bottom-0 z-10 flex flex-col items-center justify-end pb-10 pt-16 rounded-b-[37px] pointer-events-none"
           style={{
-            background: "linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 50%)",
-            pointerEvents: hovered ? "auto" : "none",
+            background: "linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 100%)",
           }}
         >
-          <span className="flex items-center gap-2 rounded-full bg-white/15 border border-white/20 backdrop-blur-sm px-4 py-2 text-white text-[12px] font-bold tracking-wide">
+          <a
+            href={p.src}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="pointer-events-auto flex items-center gap-2 rounded-full bg-white/15 border border-white/20 backdrop-blur-sm px-4 py-2 text-white text-[12px] font-bold tracking-wide transition-colors duration-200 hover:bg-white/25"
+          >
             <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
               <polyline points="15 3 21 3 21 9" />
               <line x1="10" y1="14" x2="21" y2="3" />
             </svg>
             {p.domain}
-          </span>
-        </motion.a>
+          </a>
+        </motion.div>
 
         {/* Bottom home indicator */}
         <div className="absolute bottom-2 inset-x-0 z-20 flex justify-center pointer-events-none">

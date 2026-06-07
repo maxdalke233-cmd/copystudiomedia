@@ -261,31 +261,40 @@ export default function HeroSection() {
           </motion.p>
 
           {/* CTA row */}
-          <motion.div {...fadeUp(0.5)} className="mt-7 flex items-center gap-4 flex-wrap">
+          <motion.div {...fadeUp(0.5)} className="mt-7 flex flex-col items-start gap-4">
+            <div className="flex items-center gap-4 flex-wrap">
+              <a
+                href="https://calendly.com/maxdalke233/30min"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="blue-button rounded-full px-5 py-2.5 text-[13px] font-extrabold text-white flex items-center gap-2 hover:scale-[1.025] hover:shadow-blue-glow transition-all duration-300"
+              >
+                <TypewriterLabel />
+                <ArrowRight className="h-4 w-4 shrink-0" />
+              </a>
+              <div className="flex items-center gap-2.5">
+                <div className="flex -space-x-2">
+                  {avatars.map((a, i) => (
+                    <Image
+                      key={i}
+                      src={a.src}
+                      alt=""
+                      width={32}
+                      height={32}
+                      className={`h-8 w-8 rounded-full border-2 border-[#090909] object-cover ${a.pos}`}
+                    />
+                  ))}
+                </div>
+                <span className="text-[12px] font-medium text-white/55">10+ Glückliche Kunden</span>
+              </div>
+            </div>
             <a
-              href="https://calendly.com/maxdalke233/30min"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="blue-button rounded-full px-5 py-2.5 text-[13px] font-extrabold text-white flex items-center gap-2 hover:scale-[1.025] hover:shadow-blue-glow transition-all duration-300"
+              href="#angebote"
+              className="rounded-full border border-white/15 bg-white/[0.04] px-5 py-2.5 text-[13px] font-extrabold text-white flex items-center gap-2 hover:bg-white/[0.08] transition-colors duration-200"
             >
-              <TypewriterLabel />
+              Unsere Angebote
               <ArrowRight className="h-4 w-4 shrink-0" />
             </a>
-            <div className="flex items-center gap-2.5">
-              <div className="flex -space-x-2">
-                {avatars.map((a, i) => (
-                  <Image
-                    key={i}
-                    src={a.src}
-                    alt=""
-                    width={32}
-                    height={32}
-                    className={`h-8 w-8 rounded-full border-2 border-[#090909] object-cover ${a.pos}`}
-                  />
-                ))}
-              </div>
-              <span className="text-[12px] font-medium text-white/55">10+ Glückliche Kunden</span>
-            </div>
           </motion.div>
 
           {/* Stat cards */}

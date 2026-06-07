@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Nunito, Bricolage_Grotesque, Inter, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import TabTitleHook from "@/components/tab-title-hook";
+import LoadingScreen from "@/components/loading-screen";
 
 const nunito = Nunito({
   subsets: ["latin", "latin-ext"],
@@ -52,6 +53,7 @@ export default function RootLayout({
     >
       <body className="font-body bg-[#090909] text-white antialiased" suppressHydrationWarning>
         <TabTitleHook />
+        <LoadingScreen />
         {children}
       </body>
     </html>

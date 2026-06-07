@@ -54,6 +54,15 @@ const projects: Project[] = [
     avatar: "/images/dietz-saft-logo.png",
     logoMode: true,
   },
+  {
+    tags: ["WEBSITE", "DESIGN", "BRANDING"],
+    screenshot: "/images/projects/site-vs-agency.png",
+    domain: "vs-agency.de",
+    client: "VS Agency",
+    role: "SOCIAL-MEDIA-AGENTUR · GEGRÜNDET 2026",
+    avatar: "/images/vs-agency-logo.png",
+    logoMode: true,
+  },
 ];
 
 function TagPill({ label }: { label: string }) {

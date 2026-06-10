@@ -20,12 +20,12 @@ type Project = {
 
 const projects: Project[] = [
   {
-    src: "https://immobilienservice-atzor.de/",
-    screenshot: "/images/hero-phones/site-atzor.png",
-    title: "Immobilienservice Atzor",
-    domain: "immobilienservice-atzor.de",
-    year: "2025",
-    tags: ["Immobilien", "Dienstleistung", "B2C"],
+    src: "https://vs-agency.de/",
+    screenshot: "/images/hero-phones/site-vs-agency.png",
+    title: "VS Agency",
+    domain: "vs-agency.de",
+    year: "2026",
+    tags: ["Videoagentur", "Short-Form Content", "B2C"],
   },
   {
     src: "https://copystudio.marketing/",

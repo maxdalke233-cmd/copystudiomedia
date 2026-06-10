@@ -18,7 +18,7 @@ export default function LoadingScreen() {
 
     let raf = 0;
     const start = performance.now();
-    const DURATION_MS = 5000; // Loading-Screen läuft fest ca. 5 Sekunden
+    const DURATION_MS = 2000; // Loading-Screen läuft fest ca. 2 Sekunden
 
     const finish = () => {
       setProgress(100);

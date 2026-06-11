@@ -27,23 +27,28 @@ export default function ImpressumPage() {
           Impressum
         </h1>
         <p className="text-[13px] text-white/30 mb-14 font-mono tracking-widest uppercase">
-          Angaben gemäß § 5 TMG
+          Angaben gemäß § 5 DDG (Digitale-Dienste-Gesetz) und § 18 MStV
         </p>
 
         <div className="space-y-12 text-[15px] leading-[1.8] text-white/65">
 
           <section>
             <h2 className="font-heading text-[18px] font-black text-white mb-4 tracking-[-0.01em]">
-              Verantwortlich
+              Anbieter
             </h2>
             <p>
-              Maxim Dalke<br />
-              CopyStudio Web<br />
-              {/* ADRESSE EINTRAGEN */}
-              [Straße und Hausnummer]<br />
-              [PLZ] [Ort]<br />
-              Deutschland
+              CopyStudio Marketing LLC<br />
+              1209 Mountain Road PL NE, STE R<br />
+              Albuquerque, NM 87110<br />
+              USA
             </p>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-[18px] font-black text-white mb-4 tracking-[-0.01em]">
+              Vertreten durch
+            </h2>
+            <p>Niki Dalke und Moritz Foerster</p>
           </section>
 
           <section>
@@ -51,31 +56,56 @@ export default function ImpressumPage() {
               Kontakt
             </h2>
             <p>
-              E-Mail:{" "}
-              <a
-                href="mailto:info@copystudio.media"
-                className="text-[#0041FB] hover:underline"
-              >
-                info@copystudio.media
-              </a>
-              <br />
               Telefon:{" "}
               <a
-                href="tel:+4915906744569"
+                href="tel:+491726450623"
                 className="text-[#0041FB] hover:underline"
               >
-                +49 159 0674 4569
+                +49 172 6450623
+              </a>
+              <br />
+              E-Mail:{" "}
+              <a
+                href="mailto:info@copystudio.marketing"
+                className="text-[#0041FB] hover:underline"
+              >
+                info@copystudio.marketing
               </a>
             </p>
           </section>
 
           <section>
             <h2 className="font-heading text-[18px] font-black text-white mb-4 tracking-[-0.01em]">
-              Umsatzsteuer-ID
+              Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV
             </h2>
             <p>
-              Umsatzsteuer-Identifikationsnummer gemäß § 27a Umsatzsteuergesetz:<br />
-              [USt-IdNr. eintragen, sofern vorhanden]
+              Niki Dalke und Moritz Foerster<br />
+              CopyStudio Marketing LLC<br />
+              1209 Mountain Road PL NE, STE R<br />
+              Albuquerque, NM 87110, USA
+            </p>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-[18px] font-black text-white mb-4 tracking-[-0.01em]">
+              EU-Streitschlichtung
+            </h2>
+            <p>
+              Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:{" "}
+              <a
+                href="https://ec.europa.eu/consumers/odr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#0041FB] hover:underline"
+              >
+                https://ec.europa.eu/consumers/odr
+              </a>
+              .<br />
+              Unsere E-Mail-Adresse findest du oben im Impressum.
+            </p>
+            <p className="mt-4">
+              Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer
+              Verbraucherschlichtungsstelle teilzunehmen.
             </p>
           </section>
 
@@ -84,8 +114,8 @@ export default function ImpressumPage() {
               Haftung für Inhalte
             </h2>
             <p>
-              Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen
-              Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir
+              Als Diensteanbieter sind wir gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen
+              Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 DDG sind wir
               als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde
               Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige
               Tätigkeit hinweisen.
@@ -123,40 +153,20 @@ export default function ImpressumPage() {
               Urheberrecht
             </h2>
             <p>
-              Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen
-              dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art
-              der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen
-              Zustimmung des jeweiligen Autors bzw. Erstellers.
+              Die durch die CopyStudio Marketing LLC erstellten Inhalte und Werke auf diesen Seiten
+              sind urheberrechtlich geschützt. Als Unternehmen mit Sitz in den USA beansprucht die
+              CopyStudio Marketing LLC den Schutz ihrer Inhalte nach US-amerikanischem Urheberrecht.
+              Für Nutzer in Deutschland und der EU gilt ergänzend das deutsche Urheberrechtsgesetz
+              (UrhG), soweit anwendbar — auf Grundlage der Berner Übereinkunft zum Schutz von Werken
+              der Literatur und Kunst, der sowohl die USA als auch die EU-Mitgliedstaaten angehören.
             </p>
             <p className="mt-4">
-              Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch
-              gestattet. Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden,
-              werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche
-              gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden,
-              bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen
-              werden wir derartige Inhalte umgehend entfernen.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="font-heading text-[18px] font-black text-white mb-4 tracking-[-0.01em]">
-              Streitschlichtung
-            </h2>
-            <p>
-              Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:{" "}
-              <a
-                href="https://ec.europa.eu/consumers/odr/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[#0041FB] hover:underline"
-              >
-                https://ec.europa.eu/consumers/odr/
-              </a>
-              .
-            </p>
-            <p className="mt-4">
-              Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer
-              Verbraucherschlichtungsstelle teilzunehmen.
+              Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen
+              Gebrauch gestattet. Soweit Inhalte auf dieser Seite nicht von uns erstellt wurden,
+              werden die Urheberrechte Dritter beachtet und entsprechend gekennzeichnet. Solltest du
+              auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden
+              Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir entsprechende Inhalte
+              umgehend entfernen.
             </p>
           </section>
 
@@ -164,7 +174,7 @@ export default function ImpressumPage() {
 
         <div className="mt-16 pt-8 border-t border-white/[0.07]">
           <p className="text-[12px] text-white/25 font-mono tracking-widest uppercase">
-            © 2026 CopyStudio Web · Maxim Dalke
+            © 2026 CopyStudio Marketing LLC · alle Rechte vorbehalten
           </p>
         </div>
       </main>

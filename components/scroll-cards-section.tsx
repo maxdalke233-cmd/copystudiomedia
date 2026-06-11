@@ -540,13 +540,20 @@ function StackCard({
   children: React.ReactNode;
 }) {
   const isLast = index === TOTAL - 1;
+  // The first card and the last card never dim; the rest darken as they're covered.
+  const noDim = isLast || index === 0;
   // The scroll offsets are tuned so card k pins exactly at progress k/(TOTAL−1);
   // card `index` is active between its own arrival and the next card's.
   const arrive = index / (TOTAL - 1);
   const covered = Math.min(1, (index + 1) / (TOTAL - 1));
-  const filter = useTransform(scrollProgress, [arrive, covered], ["brightness(1)", isLast ? "brightness(1)" : "brightness(0.7)"]);
+  // A CSS filter promotes the card to its own GPU layer, which makes the text
+  // render blurry while it's transformed/stacked. So no-dim cards get NO filter
+  // at all (not even brightness(1)) to stay perfectly crisp.
+  const filterMv = useTransform(scrollProgress, [arrive, covered], ["brightness(1)", "brightness(0.7)"]);
+  const filter = noDim ? undefined : filterMv;
   // Fully covered cards are hidden so they can't peek out below the (taller)
-  // last slot while the section scrolls away.
+  // last slot while the section scrolls away. Desktop offsets are tuned exactly,
+  // so this fade only ever runs while the card is already covered.
   const opacity = useTransform(scrollProgress, [covered - 0.02, covered], [1, isLast ? 1 : 0]);
   // Active card gets a subtle blue edge; it fades back out as the next card covers it.
   const borderColor = useTransform(
@@ -594,14 +601,53 @@ function MobileCard({
   children: React.ReactNode;
 }) {
   const isLast = index === TOTAL - 1;
+  // The first card and the last card never dim; the rest darken as they're covered.
+  const noDim = isLast || index === 0;
   // Cards are auto-height on mobile; with a small gap the arrivals are spread
   // roughly evenly over (TOTAL − 1) segments of the container.
   const arrive = Math.min(1, index / (TOTAL - 1));
   const covered = Math.min(1, (index + 1) / (TOTAL - 1));
-  const filter = useTransform(scrollProgress, [arrive, covered], ["brightness(1)", isLast ? "brightness(1)" : "brightness(0.7)"]);
-  // Fully covered cards are hidden so they can't peek out below shorter cards
-  // while the section scrolls away.
-  const opacity = useTransform(scrollProgress, [covered - 0.02, covered], [1, isLast ? 1 : 0]);
+  // A CSS filter promotes the card to its own GPU layer, which makes the text
+  // render blurry while it's transformed/stacked. So no-dim cards get NO filter
+  // at all (not even brightness(1)) to stay perfectly crisp.
+  const filterMv = useTransform(scrollProgress, [arrive, covered], ["brightness(1)", "brightness(0.7)"]);
+  const filter = noDim ? undefined : filterMv;
+
+  // Mobile card heights vary, so progress-based guesses fade too early. Instead,
+  // measure real pixel positions: a card only fades once the NEXT card has fully
+  // docked over it (or just before it would un-stick and "stair-step" upward at
+  // the section end) — never while it's still the visible, active card.
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const fadeRef = useRef<[number, number] | null>(null);
+  const { scrollY } = useScroll();
+
+  useEffect(() => {
+    if (isLast) return;
+    const measure = () => {
+      const el = wrapRef.current;
+      const next = el?.nextElementSibling as HTMLElement | null;
+      const container = el?.parentElement;
+      if (!el || !next || !container) return;
+      const cTop = container.getBoundingClientRect().top + window.scrollY;
+      // Next card fully covers this one when its top reaches the sticky offset.
+      const dock = cTop + next.offsetTop - 76;
+      // This card starts sliding up (un-sticks) when the container bottom
+      // catches up with it at the end of the section.
+      const unstick = cTop + container.offsetHeight - el.offsetHeight - 76;
+      const end = Math.min(dock + 48, unstick);
+      fadeRef.current = [end - 48, end];
+    };
+    measure();
+    const t = setTimeout(measure, 600); // re-measure after fonts/layout settle
+    window.addEventListener("resize", measure);
+    return () => { clearTimeout(t); window.removeEventListener("resize", measure); };
+  }, [isLast]);
+
+  const opacity = useTransform(scrollY, (y) => {
+    const r = fadeRef.current;
+    if (isLast || !r) return 1;
+    return Math.min(1, Math.max(0, (r[1] - y) / (r[1] - r[0])));
+  });
   // Active card gets a subtle blue edge; it fades back out as the next card covers it.
   const borderColor = useTransform(
     scrollProgress,
@@ -612,7 +658,7 @@ function MobileCard({
   );
 
   return (
-    <div className="sticky w-full" style={{ top: 76, zIndex: index + 1, marginBottom: isLast ? 0 : 16 }}>
+    <div ref={wrapRef} className="sticky w-full" style={{ top: 76, zIndex: index + 1, marginBottom: isLast ? 0 : 16 }}>
       <motion.div
         className="rounded-2xl bg-[#0D0D10] border flex items-stretch overflow-hidden"
         style={{ filter, borderColor, opacity, maxHeight: "calc(100vh - 96px)" }}

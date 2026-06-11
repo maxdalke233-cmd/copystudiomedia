@@ -25,7 +25,7 @@ const offers: Offer[] = [
   {
     name: "Website-Paket",
     tagline: "Dein professioneller Auftritt — einmalig umgesetzt.",
-    price: "600 – 1.400 €",
+    price: "700 €",
     priceSuffix: "einmalig",
     features: [
       "Individuelles Design & Copywriting",
@@ -36,7 +36,6 @@ const offers: Offer[] = [
     ],
     cta: "Erstgespräch sichern",
     gradient: true,
-    badge: "Im letzten Monat 4× gekauft",
   },
   {
     name: "Betreuung",

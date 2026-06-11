@@ -30,21 +30,12 @@ type Project = {
 
 const projects: Project[] = [
   {
-    tags: ["WEBSITE", "DESIGN", "BRANDING"],
-    screenshot: "/images/projects/site-litke.png",
-    domain: "litke-fensterbau.vercel.app",
-    client: "LITKE Fensterbau",
-    role: "FENSTER & TÜREN · RAVENSTEIN",
-    avatar: "/images/litke-logo.png",
-    logoMode: true,
-  },
-  {
-    tags: ["WEBSITE", "BRANDING", "SEO"],
-    screenshot: "/images/projects/site-maxklusiv.png",
-    domain: "maxklusiv.vercel.app",
-    client: "Maxklusiv Carworks",
-    role: "FAHRZEUGVEREDELUNG · BUCHEN",
-    avatar: "/images/maxklusiv-logo.png",
+    tags: ["WEBSITE", "COPYWRITING", "DESIGN"],
+    screenshot: "/images/projects/site-copystudio.png",
+    domain: "copystudio.marketing",
+    client: "CopyStudio.Marketing",
+    role: "WERBETEXTE & PERFORMANCE MARKETING",
+    avatar: "/images/copystudio-logo-icon.png",
     logoMode: true,
   },
   {
